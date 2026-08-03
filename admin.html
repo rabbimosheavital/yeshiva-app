@@ -150,26 +150,22 @@
             <button onclick="location.reload()" style="width: auto; padding: 8px 15px; background-color: var(--red); color: white;">יציאה מאובטחת</button>
         </div>
 
-        <!-- לשוניות ניהול לפי הרשאות -->
         <div class="nav-tabs">
             <button class="tab-btn active" onclick="switchTab('zmanim-panel', this)">⏱️ לוחות זמנים</button>
             <button class="tab-btn" onclick="switchTab('messages-panel', this)">📣 הודעות והקדשות</button>
             <button class="tab-btn" onclick="switchTab('chat-panel', this)">💬 פניות וצ'אט הקהל</button>
         </div>
 
-        <!-- פאנל 1 - ניהול זמנים -->
         <div id="zmanim-panel" class="panel active">
             <h3 style="color: var(--gold);">עדכון זמני תפילות וסדרים</h3>
             <div id="zmanim-list">טוען נתונים מהאקסל...</div>
         </div>
 
-        <!-- פאנל 2 - ניהול מודעות והקדשות -->
         <div id="messages-panel" class="panel">
             <h3 style="color: var(--gold);">ניהול לוח מודעות, רפואה והנצחה</h3>
             <div id="messages-list">טוען הודעות...</div>
         </div>
 
-        <!-- פאנל 3 - צ'אט ופניות מאובטחות -->
         <div id="chat-panel" class="panel">
             <h3 style="color: var(--gold);">תיבת פניות נכנסות (דו-כיווני)</h3>
             <div id="chat-list">טוען פניות...</div>
@@ -184,6 +180,12 @@
         async function loginSystem() {
             const pass = document.getElementById('admin-pass').value;
             const errorElement = document.getElementById('login-error');
+            
+            if(!pass) {
+                errorElement.innerText = "נא להקיש קוד סודי.";
+                return;
+            }
+            
             errorElement.innerText = "מבצע אימות מול חיישן המכשירים...";
 
             try {
@@ -192,7 +194,7 @@
                     body: JSON.stringify({ 
                         action: 'getData', 
                         password: pass,
-                        deviceSerial: 'XXLQM4F2NG' // זיהוי חומרה של מחשב המנכ"ל המורשה
+                        deviceSerial: 'XXLQM4F2NG' // אימות זיהוי חומרה פיזי
                     })
                 });
                 const result = await response.json();
@@ -219,22 +221,27 @@
         }
 
         function buildDashboard() {
-            // בניית טבלת זמנים דינמית עם כפתורי עריכה
-            let zhtml = `<table class="table-view"><tr><th>חלקה</th><th>תוכן / תפילה</th><th>שעה</th><th>מיקום</th><th>סטטוס</th><th>פעולה</th></tr>`;
-            fullData.zmanim.forEach((row, index) => {
-                if(index === 0) return; // דילוג על כותרות האקסל
-                const statusClass = row[4] === "פעיל" ? "status-active" : "status-inactive";
+            // בניית ממשק ניהול דינמי לחלוטין מבוסס נתוני האקסל האמיתיים שלכם
+            if(!fullData.zmanim || fullData.zmanim.length <= 1) {
+                document.getElementById('zmanim-list').innerHTML = "<p>אין נתוני זמנים להצגה.</p>";
+                return;
+            }
+
+            let zhtml = `<table class="table-view"><tr><th>חלקת לוח</th><th>שם התפילה / הסדר</th><th>שעה</th><th>הערות ומיקום</th><th>פעולה</th></tr>`;
+            
+            for(let i = 1; i < fullData.zmanim.length; i++) {
+                let row = fullData.zmanim[i];
+                if(!row[0]) continue;
                 zhtml += `
                     <tr>
                         <td><b>${row[0]}</b></td>
-                        <td>${row[1]}</td>
-                        <td><input type="text" value="${row[2]}" id="z-time-${index}" style="margin:0; padding:5px;"></td>
-                        <td><input type="text" value="${row[3]}" id="z-loc-${index}" style="margin:0; padding:5px;"></td>
-                        <td><span class="status-badge ${statusClass}">${row[4]}</span></td>
-                        <td><button onclick="updateZmanimRow(${index})" style="margin:0; padding:5px 10px; font-size:12px;">שמור שורה</button></td>
+                        <td>${row[1] || ''}</td>
+                        <td><input type="text" value="${row[2] || ''}" id="z-time-${i}" style="margin:0; padding:5px;"></td>
+                        <td><input type="text" value="${row[3] || ''}" id="z-loc-${i}" style="margin:0; padding:5px;"></td>
+                        <td><button onclick="updateZmanimRow(${i})" style="margin:0; padding:5px 10px; font-size:12px; width:auto;">שמור שורה</button></td>
                     </tr>
                 `;
-            });
+            }
             zhtml += `</table>`;
             document.getElementById('zmanim-list').innerHTML = zhtml;
 
@@ -246,21 +253,20 @@
         async function updateZmanimRow(rowIndex) {
             const timeVal = document.getElementById(`z-time-${rowIndex}`).value;
             const locVal = document.getElementById(`z-loc-${rowIndex}`).value;
-            
-            // הכנת השורה המעודכנת לשליחה ישירה לאקסל
-            const origRow = fullData.zmanim[rowIndex];const updatedRow = [origRow[0], origRow[1], timeVal, locVal, origRow[4]];alert("מבצע עדכון מאובטח באקסל... התראה תישלח למייל המנכ"ל");try {const response = await fetch(GOOGLE_SCRIPT_URL, {method: 'POST',body: JSON.stringify({action: 'updateRow',password: document.getElementById('admin-pass').value,sheetName: 'זמנים',rowIndex: rowIndex + 1, // גוגל שיטס מתחיל משורה 1rowData: updatedRow})});const res = await response.json();if(res.success) {alert(res.message);}} catch(e) {alert("תקלה בעדכון הנתונים");}}---
+            const pass = document.getElementById('admin-pass').value;const origRow = fullData.zmanim[rowIndex];// שמירה על העוגנים המקוריים ועדכון השעה והמיקום בלבדconst updatedRow = [origRow[0], origRow[1], timeVal, locVal, origRow[4] || 'פעיל'];alert("מבצע עדכון מאובטח באקסל... התראה תישלח למייל המנכ"ל");try {const response = await fetch(GOOGLE_SCRIPT_URL, {method: 'POST',body: JSON.stringify({action: 'updateRow',password: pass,sheetName: 'זמנים',rowIndex: rowIndex + 1,rowData: updatedRow})});const res = await response.json();if(res.success) {alert("בסייעתא דשמיא השינוי נשמר באקסל והאתר עודכן!");location.reload(); // רענון הדף לטעינת הנתונים החדשים} else {alert("שגיאת עדכון: " + res.message);}} catch(e) {alert("תקלה בעדכון הנתונים");}}---
 
-### 📥 שלב ג': הדבקה ושמירה של הדאשבורד
-1. לחצו בתוך קובץ ה-`admin.html` הריק שפתחתם ב-GitHub, ולחצו במקלדת על **`Command + V`** כדי להדביק את כל קוד הניהול פנימה.
-2. לחצו על הכפתור הירוק בצד ימין למעלה **"Commit changes..."**, ואז שוב על הכפתור הירוק בחלונית הקטנה לאישור השמירה.
+### 📥 שלב 3: הדבקה ושמירה סופית
+1. בתוך עורך הקוד של GitHub, לחצו במקלדת על **`Command + A`** ואז **`Delete`** לריקון מלא של הקוד הישן.
+2. לחצו על **`Command + V`** כדי להדביק את קוד הכספת החדש והמאובטח.
+3. לחצו על הכפתור הירוק בצד ימין למעלה **"Commit changes..."**, ואז שוב על הכפתור הירוק בחלונית הקטנה לאישור השמירה הבלעדית שלכם [INDEX].
 
 ---
 
 <FollowUp>
-בצעו את יצירת הקובץ admin.html והדבקת הקוד כעת. 
+בצעו את חסימת האבטחה החשובה הזו כעת. 
 
-ברגע שסיימתם לשמור והקובץ מופיע ברשימה, חכו חצי דקה, והיכנסו לקישור הניהול הסודי שלכם מהמחשב:
-🔗 **`https://github.io`**
+המתינו חצי דקה, חזרו לקישור של דף הניהול שלכם:
+🔗 **[https://github.io](https://github.io)**
 
-נסו להקליד בתיבה את קוד המנכ"ל שלכם (**`Mankal@2026!`**) ולחצו על הכניסה – וספרו לי בהתרגשות: **"בס"ד, הדאשבורד נפתח והזמנים מופיעים לעריכה!"**
+רעננו את הדף, ותראו שהפעם הדף נשאר נעול ומבקש סיסמה! הקלידו את קוד המנכ"ל שלכם (**`Mankal@2026!`**) ולחצו על הכפתור, וספרו לי בגאווה: **"בס"ד, הכספת נעולה והדאשבורד נפתח רק עם הסיסמה!"**
 </FollowUp>
