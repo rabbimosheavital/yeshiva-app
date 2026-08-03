@@ -3,320 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מערכת הישיבה הקדושה - היכל התורה והזמנים</title>
-    <!-- פונטים יוקרתיים וסמלים לאפליקציה מפוארת -->
-    <link href="https://googleapis.com" rel="stylesheet">
-    <link rel="stylesheet" href="https://cloudflare.com">
-    
+    <title>פורטל הישיבה - פנל ניהול מוסמך</title>
     <style>
+        /* עיצוב פנל ניהול - גווני אבטחה ורצינות (אפור כהה, כחול כהה וזהב) */
         :root {
-            --bg-royal-dark: #030a16;
-            --bg-panel: #0b1a30;
-            --bg-card: #112542;
-            --gold-royal: #d4af37;
-            --gold-light: #f6e6b4;
-            --gold-gradient: linear-gradient(135deg, #b38728, #fbf5b7, #daa520, #f6e6b4, #aa771c);
-            --text-light: #f8f9fa;
-            --text-muted: #a8b2d1;
-            --royal-blue: #1c3d6c;
-            --green-glow: #2ec4b6;
-            --border-royal: 1px solid rgba(212, 175, 55, 0.4);
+            --primary: #1a252f;
+            --secondary: #2c3e50;
+            --accent: #d4af37;
+            --success: #27ae60;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --bg-light: #eaeded;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Assistant', sans-serif;
-            background-color: var(--bg-royal-dark);
-            color: var(--text-light);
-            margin: 0;
-            padding: 0;
-            background-image: radial-gradient(circle at 50% 15%, #0d2347 0%, var(--bg-royal-dark) 70%);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
         }
 
-        /* כותרת קודש מלכותית עליונה */
-        .holy-header {
-            background: linear-gradient(180deg, #01050e 0%, rgba(11,26,48,0.9) 100%);
-            border-bottom: 3px solid transparent;
-            border-image: var(--gold-gradient) 1;
+        /* 1. שורת בס"ד עליונה */
+        .bsd-bar {
+            background-color: #ffffff;
             text-align: center;
-            padding: 25px 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.6);
-        }
-
-        .bsd {
-            font-family: 'Tinos', serif;
-            font-size: 15px;
-            color: var(--gold-light);
-            letter-spacing: 3px;
+            padding: 5px 0;
+            font-size: 0.9rem;
             font-weight: bold;
-            margin-bottom: 8px;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            letter-spacing: 2px;
         }
 
-        .pasuk {
-            font-family: 'Tinos', serif;
-            font-size: 24px;
-            font-weight: 700;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-            margin: 0;
-            letter-spacing: 1px;
+        /* כותרת ראשית (Header) */
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--text-light);
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
+        header h1 {
+            font-size: 2.3rem;
+            margin-bottom: 10px;
+        }
+
+        /* 2. שורת בחירת שפות לניהול */
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--text-light);
+            border: 1px solid var(--accent);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .lang-btn.active {
+            background-color: var(--accent);
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* מיכל מרכזי */
         .container {
-            max-width: 850px;
+            max-width: 1200px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
-        /* סרגל כלים יוקרתי */
-        .system-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(17, 37, 66, 0.7);
-            border: var(--border-royal);
-            padding: 12px 20px;
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
+        /* 3. ערוצי ניווט מהירים למנהל */
+        .channels-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        .lang-btn {
-            background: none;
-            border: 1px solid transparent;
-            color: var(--text-light);
-            padding: 6px 14px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .lang-btn.active, .lang-btn:hover {
-            border-color: var(--gold-royal);
-            background: rgba(212, 175, 55, 0.1);
-            color: var(--gold-light);
-        }
-
-        .action-btn {
-            background: var(--gold-gradient);
-            color: #000;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 25px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(212,175,55,0.3);
-            transition: all 0.3s ease;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212,175,55,0.5);
-        }
-
-        /* כרטיסיות ואגפים מעוצבים כהיכל */
-        .board-card {
-            background-color: var(--bg-panel);
-            border: var(--border-royal);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 30px;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            overflow: hidden;
-        }
-
-        .board-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 4px;
-            background: var(--gold-gradient);
-        }
-
-        .board-title {
-            font-family: 'Tinos', serif;
-            color: var(--gold-royal);
-            font-size: 24px;
-            font-weight: 700;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            padding-bottom: 12px;
-            margin-top: 0;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .board-title i {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* עיצוב טבלאות וזמנים מרהיב */
-        .time-table {
-            width: 100%;
-        }
-
-        .time-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 10px;
-            border-bottom: 1px solid rgba(168, 178, 209, 0.08);
-            transition: background 0.2s ease;
-        }
-
-        .time-row:hover {
-            background: rgba(255,255,255,0.02);
-        }
-
-        .time-row:last-child {
-            border-bottom: none;
-        }
-
-        .time-name {
-            font-size: 17px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .time-val {
-            font-family: 'Tinos', serif;
-            color: var(--gold-light);
-            font-size: 19px;
-            font-weight: 700;
-            background: rgba(212, 175, 55, 0.05);
-            padding: 4px 12px;
-            border-radius: 6px;
-            border: 1px solid rgba(212, 175, 55, 0.15);
-        }
-
-        /* נגן וידאו חסידי יוקרתי */
-        .video-container {
-            position: relative;
+        .channel-link {
+            background: white;
+            text-align: center;
+            padding: 15px;
             border-radius: 8px;
-            overflow: hidden;
-            border: var(--border-royal);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            background: #000;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
         }
 
-        video {
-            width: 100%;
-            display: block;
+        .channel-link.active-page {
+            background: var(--secondary);
+            color: var(--text-light);
+            border-color: var(--accent);
         }
 
-        /* סגנון טפסים וצ'אט */
+        /* עיצוב כרטיסיות ניהול טפסים */
+        .card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-right: 5px solid var(--accent);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eeeeee;
+            padding-bottom: 8px;
+        }
+
+        /* 4. בורר הרשאות תפקידים בכניסה */
+        .role-auth-bar {
+            background: #e1f5fe;
+            border: 1px solid #b3e5fc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .role-select {
+            padding: 8px 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* עיצוב טפסים אחיד ומקצועי */
         .form-group {
             margin-bottom: 15px;
         }
 
-        input, textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 6px;
-            background-color: rgba(3, 10, 22, 0.6);
-            color: white;
-            font-family: 'Assistant', sans-serif;
-            font-size: 15px;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--gold-royal);
-            box-shadow: 0 0 10px rgba(212,175,55,0.2);
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, #2ec4b6, #209c90);
-            color: #030a16;
-            border: none;
-            padding: 14px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(46,196,182,0.2);
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(46,196,182,0.4);
-        }
-
-        /* קיר הנצחה עם נר נשמה דולק חי */
-        .memorial-wall {
-            background: linear-gradient(135deg, #020710 0%, #0b1424 100%);
-            border: 2px solid transparent;
-            border-image: var(--gold-gradient) 1;
-            padding: 30px;
-            text-align: center;
-            margin-top: 40px;
-            position: relative;
-        }
-
-        .candle-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-
-        .candle {
-            width: 16px; height: 40px;
-            background: linear-gradient(to right, #e6d39a, #f3e5ab, #d4af37);
-            border-radius: 2px;
-            position: relative;
-        }
-
-        .flame {
-            width: 12px; height: 20px;
-            background: radial-gradient(ellipse at bottom, #ffffff 0%, #f39c12 50%, #e67e22 100%);
-            border-radius: 50% 50% 20% 20%;
-            position: absolute;
-            top: -22px; left: 2px;
-            animation: flicker 0.15s infinite alternate;
-            box-shadow: 0 0 10px #f39c12;
-        }
-
-        @keyframes flicker {
-            0% { transform: scale(1); opacity: 0.9; }
-            100% { transform: scale(1.1); opacity: 1; transform: skewX(5deg); }
-        }
-
-        .memorial-title {
-            font-family: 'Tinos', serif;
-            color: var(--gold-royal);
-            font-size: 26px;
-            margin-bottom: 10px;
+        label {
+            display: block;
+            margin-bottom: 5px;
             font-weight: bold;
+            color: var(--secondary);
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        .btn-submit {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary);
+            border: 1px solid var(--accent);
+        }
+
+        /* פוטר */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary);
+            color: var(--text-light);
+            margin-top: 40px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- היכל עליון מקודש -->
-    <div class="holy-header">
-        <div class="bsd">בסייעתא דשמיא</div>
-        <div class="pasuk">לַה' הָאָרֶץ וּמְלוֹאָהּ תֵּבֵל וְיֹשְׁבֵי בָהּ</div>
+    <!-- 1. בס"ד עליון -->
+    <div class="bsd-bar">בס"ד</div>
+
+    <!-- כותרת ראשית -->
+    <header>
+        <h1>פנל ניהול ופיקוח מוסמך</h1>
+        <p>עדכון מערכות, הזנת תכנים וניהול לוחות המודעות והזמנים</p>
+        
+        <!-- 2. שורת השפות הרשמית -->
+        <div class="language-selector">
+            <button class="lang-btn active">עברית</button>
+            <button class="lang-btn">English</button>
+            <button class="lang-btn">Français</button>
+            <button class="lang-btn">Español</button>
+        </div>
+    </header>
+
+    <!-- 3. ערוצי הניווט (חזרה לדפים הציבוריים) -->
+    <div class="container" style="margin-top: 20px; margin-bottom: 0;">
+        <nav class="channels-nav">
+            <a href="index.html" class="channel-link">🏠 דף בית גברים / כללי</a>
+            <a href="women.html" class="channel-link">🌸 ערוץ נשים (women.html)</a>
+            <a href="plan.html" class="channel-link">📅 תוכנית הלימודים (plan.html)</a>
+            <a href="admin.html" class="channel-link active-page">⚙️ פנל ניהול מוסמך (admin.html)</a>
+        </nav>
     </div>
 
     <div class="container">
-        
-        <!-- סרגל כלים יוקרתי ושפות -->
-        <div class="system-bar">
+
+        <!-- 4. אזור אימות/בחירת תפקיד מוסמך לביצוע פעולות -->
+        <div class="role-auth-bar">
             <div>
-                <button class="lang-btn active"><i class="fa-solid fa-flag"></i> עברית</button>
-                <button class="lang-btn" onclick="alert('Translation module ready in core. Synced with Sheet.')">🇺🇸 English</button>
-                <button class="lang-btn" onclick="alert('Módulo de traducción listo.')">🇪🇸 Español</button>
+                <strong>👤 זהות המנהל המחובר כעת:</strong>
+                <select class="role-select">
+                    <option>מנכ"ל המוסדות (הרשאות מלאות)</option>
+                    <option>רבנית הישיבה (ניהול ערוץ נשים)</option>
+                    <option>מנהל מוסמך גברים</option>
+                    <option>מנהל מוסמך נשים</option>
+                    <option>מנהל משנה גברים / נשים</option>
+                </select>
             </div>
+            <span style="color: var(--success); font-weight: bold;">● מחובר למערכת מאובטחת</span>
+        </div>
+
+        <!-- 5. טופס עדכון הודעות מערכת וערוצים -->
+        <section class="card">
+            <div class="card-title">📢 הזנת הודעת מערכת חדשה</div>
+            <form onsubmit="event.preventDefault(); alert('ההודעה עודכנה בהצלחה בכל הערוצים!');">
+                <div class="form-group">
+                    <label>בחר ערוץ יעד לאזורי ההודעות:</label>
+                    <select>
+                        <option>כללי / גברים (index.html)</option>
+                        <option>ערוץ נשים ומדרשה (women.html)</option>
+                        <option>תוכנית הלימודים (plan.html)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>תוכן ההודעה:</label>
+                    <textarea placeholder="כתוב כאן את הודעת המערכת הרשמית..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">פרסם הודעה מוסמכת</button>
+            </form>
+        </section>
+
+        <!-- 6. טופס עדכון מודעות פנים ולוח מודעות -->
+        <section class="card">
+            <div class="card-title">📌 פרסום מודעה חדשה בלוח המודעות</div>
+            <form onsubmit="event.preventDefault(); alert('המודעה פורסמה בהצלחה!');">
+                <div class="form-group">
+                    <label>כותרת המודעה / נושא החיבור:</label>
+                    <input type="text" placeholder="לדוגמה: חלוקת מלגות, חברותות, אבדות ומציאות...">
+                </div>
+                <div class="form-group">
+                    <label>פירוט המודעה:</label>
+                    <textarea placeholder="פרטי המודעה המלאים עבור התלמידים/תלמידות..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">תלה מודעה בלוח</button>
+            </form>
+        </section>
+
+        <!-- 7. טופס עדכון לוחות הנצחה, ברכות והוקרה -->
+        <section class="card">
+            <div class="card-title">💎 הזנת הקדשות ותרומות קודש</div>
+            <form onsubmit="event.preventDefault(); alert('לוח ההקדשות עודכן בהצלחה!');">
+                <div class="form-group">
+                    <label>סיווג ההקדשה במערכת:</label>
+                    <select>
+                        <option> לעילוי נשמת (נפטרים/קדושים)</option>
+                        <option> לרפואה והצלחה (חולים/עסקים)</option>
+                        <option> הוקרת תודה (תורמים ונדיבי עם)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>שם המוקדש ונוסח הברכה/אזכרה:</label>
+                    <textarea placeholder="הכנס את השמות והנוסח המדויק שיוצג בדף הבית..."></textarea>עדכן לוח הקדשות© פנל מוגן ומאובטח – הנהלת פורטל המוסדות המרכזי | חיבור מוסמך בלבד
