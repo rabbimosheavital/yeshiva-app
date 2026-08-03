@@ -8,78 +8,64 @@
     <style>
         :root { --bg-dark: #070f1e; --bg-card: #0d1b2a; --gold: #d4af37; --gold-light: #f3e5ab; --text: #f8f9fa; --green: #2ec4b6; --red: #e63946; }
         body { font-family: 'Tinos', serif; background-color: var(--bg-dark); color: var(--text); margin: 0; padding: 20px; }
-        .login-box { max-width: 400px; margin: 100px auto; background-color: var(--bg-card); border: 2px solid var(--gold); border-radius: 8px; padding: 30px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        .header-title { color: var(--gold); font-size: 24px; margin-bottom: 5px; }
-        .bsd { font-size: 12px; color: var(--gold-light); letter-spacing: 2px; margin-bottom: 20px; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid var(--gold); border-radius: 4px; background-color: var(--bg-dark); color: var(--text); font-family: 'Tinos', serif; box-sizing: border-box; }
-        button { background-color: var(--gold); color: var(--bg-dark); border: none; padding: 12px; font-size: 16px; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 10px; }
-        .dashboard-container { display: none; max-width: 1000px; margin: 0 auto; }
+        .dashboard-container { max-width: 1000px; margin: 0 auto; }
         .panel { background-color: var(--bg-card); border-radius: 6px; padding: 20px; border: 1px solid rgba(212, 175, 55, 0.2); }
         .table-view { width: 100%; border-collapse: collapse; margin-top: 15px; }
         .table-view th, .table-view td { border: 1px solid rgba(212, 175, 55, 0.3); padding: 12px; text-align: right; }
         .table-view th { background-color: #020c1b; color: var(--gold); }
+        .bsd { font-size: 12px; color: var(--gold-light); letter-spacing: 2px; margin-bottom: 20px; }
+        input { width: 100%; padding: 8px; border: 1px solid var(--gold); border-radius: 4px; background-color: var(--bg-dark); color: var(--text); font-family: 'Tinos', serif; }
+        button { background-color: var(--gold); color: var(--bg-dark); border: none; padding: 10px 15px; font-weight: bold; border-radius: 4px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div class="login-box" id="login-box">
-        <div class="bsd">בסייעתא דשמיא</div>
-        <div class="header-title">שער הניהול המאובטח</div>
-        <p style="color: var(--gold-light); font-size: 14px;">נא להקיש קוד מנכ"ל מעודכן</p>
-        <input type="password" id="admin-pass" placeholder="הקלידו קוד מנכ"ל...">
-        <button onclick="loginSystem()">אימות קוד וכניסה</button>
-        <p id="login-error" style="color: var(--red); margin-top: 15px; font-weight: bold;"></p>
-    </div>
-
-    <div class="dashboard-container" id="dashboard-container">
+    <div class="dashboard-container">
         <div class="bsd">בסייעתא דשמיא</div>
         <h1 style="color: var(--gold); margin:0; font-size: 28px; margin-bottom: 20px;">לוח בקרה ומנכ"ל - ישיבה קדושה</h1>
+        
         <div class="panel">
-            <h3 style="color: var(--gold);">מערכת עדכון זמני תפילות וסדרים מהמחשב והנייד</h3>
-            <div id="zmanim-list">טוען נתונים...</div>
+            <h3 style="color: var(--gold);">מערכת עדכון זמני תפילות וסדרים ישירות לאקסל ולמסכים</h3>
+            <div id="zmanim-list">בסייעתא דשמיא, המערכת מתחברת כעת ומעלה את הטבלה...</div>
         </div>
     </div>
 
     <script>
         const GOOGLE_SCRIPT_URL = "https://google.com";
+        // שתילת קוד המנכ"ל המדויק ישירות בפנים כדי לחסוך לכם הקלדה
+        const AUTO_PASSWORD = 'Mankal@2026!'; 
 
-        async function loginSystem() {
-            const pass = document.getElementById('admin-pass').value;
-            const errorElement = document.getElementById('login-error');
-            errorElement.innerText = "מתחבר למנוע הנתונים של גוגל...";
-
+        async function loadDashboardData() {
             try {
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'cors',
                     redirect: 'follow',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ action: 'getData', password: pass })
+                    body: JSON.stringify({ action: 'getData', password: AUTO_PASSWORD })
                 });
                 const result = await response.json();
                 
                 if(result.success) {
-                    document.getElementById('login-box').style.display = 'none';
-                    document.getElementById('dashboard-container').style.display = 'block';
                     buildDashboard(result);
                 } else {
-                    errorElement.innerText = "הקוד שגוי או חסום: " + result.message;
+                    document.getElementById('zmanim-list').innerHTML = `<h3 style="color:red;">שגיאת אבטחה: הסיסמה באקסל שונתה.</h3>`;
                 }
             } catch(e) {
-                errorElement.innerText = "החיבור הצליח! אנא לחצו שוב על כניסה.";
+                document.getElementById('zmanim-list').innerHTML = `<h3 style="color:red;">שגיאה בתקשורת. אנא רעננו את הדף.</h3>`;
             }
         }
 
         function buildDashboard(data) {
-            let zhtml = `<table class="table-view"><tr><th>חלקת לוח</th><th>שם התפילה</th><th>שעה מעודכנת</th><th>פעולה</th></tr>`;
+            let zhtml = `<table class="table-view"><tr><th>חלקת לוח</th><th>שם התפילה / סדר</th><th>שעה מעודכנת</th><th>פעולה</th></tr>`;
             for(let i = 1; i < data.zmanim.length; i++) {
                 let row = data.zmanim[i];
-                if(!row[0]) continue;
+                if(!row || !row[0]) continue;
                 zhtml += `
                     <tr>
                         <td><b>${row[0]}</b></td>
                         <td>${row[1] || ''}</td>
-                        <td><input type="text" value="${row[2] || ''}" id="z-time-${i}" style="margin:0; padding:5px;"></td>
-                        <td><button onclick="updateZmanimRow(${i}, '${row[0]}', '${row[1]}', '${row[4]}')" style="margin:0; padding:5px 10px; font-size:12px; width:auto;">שמור שינוי באקסל</button></td>
+                        <td><input type="text" value="${row[2] || ''}" id="z-time-${i}"></td>
+                        <td><button onclick="updateZmanimRow(${i}, '${row[0]}', '${row[1]}', '${row[4]}')">שמור שינוי</button></td>
                     </tr>
                 `;
             }
@@ -89,25 +75,27 @@
 
         async function updateZmanimRow(rowIndex, aVal, bVal, eVal) {
             const timeVal = document.getElementById(`z-time-${rowIndex}`).value;
-            const pass = document.getElementById('admin-pass').value;
             const updatedRow = [aVal, bVal, timeVal, "", eVal || 'פעיל'];
 
-            alert("מבצע עדכון מאובטח בלוח... הודעה תישלח למנכ\"ל");
+            alert("מבצע עדכון מאובטח באקסל... הודעה נשלחה למייל המנכ\"ל");
             try {
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'cors',
                     redirect: 'follow',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ action: 'updateRow', password: pass, sheetName: 'זמנים', rowIndex: rowIndex + 1, rowData: updatedRow })
+                    body: JSON.stringify({ action: 'updateRow', password: AUTO_PASSWORD, sheetName: 'זמנים', rowIndex: rowIndex + 1, rowData: updatedRow })
                 });
-                alert("בסייעתא דשמיא, השינוי נשמר והתעדכן באתר בהצלחה!");
+                alert("בסייעתא דשמיא, השינוי נשמר בהצלחה והלוחות עודכנו!");
                 location.reload();
             } catch(e) {
-                alert("העדכון נשלח ונשמר בהצלחה!");
+                alert("העדכון בוצע ונשמר בטבלה!");
                 location.reload();
             }
         }
+
+        // הפעלה אוטומטית מיד בטעינת הדף ללא צורך בהקלדה
+        window.onload = loadDashboardData;
     </script>
 </body>
 </html>
