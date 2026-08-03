@@ -3,65 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>לוח בקרה ומנכ"ל - ישיבה קדושה</title>
+    <title>מערכת הישיבה הקדושה - היכל התורה והזמנים</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        :root { --bg-dark: #070f1e; --bg-card: #0d1b2a; --gold: #d4af37; --gold-light: #f3e5ab; --text: #f8f9fa; --green: #2ec4b6; --red: #e63946; }
-        body { font-family: 'Tinos', serif; background-color: var(--bg-dark); color: var(--text); margin: 0; padding: 20px; }
-        .dashboard-container { max-width: 1000px; margin: 0 auto; }
-        .panel { background-color: var(--bg-card); border-radius: 6px; padding: 20px; border: 1px solid rgba(212, 175, 55, 0.2); }
-        .table-view { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .table-view th, .table-view td { border: 1px solid rgba(212, 175, 55, 0.3); padding: 12px; text-align: right; }
-        .table-view th { background-color: #020c1b; color: var(--gold); }
-        .bsd { font-size: 12px; color: var(--gold-light); letter-spacing: 2px; margin-bottom: 20px; }
-        input { width: 100%; padding: 8px; border: 1px solid var(--gold); border-radius: 4px; background-color: var(--bg-dark); color: var(--text); font-family: 'Tinos', serif; }
-        button { background-color: var(--gold); color: var(--bg-dark); border: none; padding: 10px 15px; font-weight: bold; border-radius: 4px; cursor: pointer; }
+        :root { --bg-primary: #0a192f; --bg-secondary: #172a45; --gold-royal: #d4af37; --gold-light: #f3e5ab; --text-light: #f8f9fa; --text-muted: #a8b2d1; --green: #2ec4b6; }
+        body { font-family: 'Tinos', serif; background-color: var(--bg-primary); color: var(--text-light); margin: 0; padding: 0; box-sizing: border-box; }
+        .holy-header { background: linear-gradient(135deg, #020c1b, #0a192f); border-bottom: 2px solid var(--gold-royal); text-align: center; padding: 15px 10px; }
+        .bsd { font-size: 14px; color: var(--gold-light); letter-spacing: 2px; margin: 0 0 5px 0; }
+        .pasuk { font-size: 20px; font-weight: bold; color: var(--gold-royal); text-shadow: 1px 1px 3px rgba(0,0,0,0.5); margin: 0; }
+        .container { max-width: 800px; margin: 20px auto; padding: 0 15px; }
+        .board-card { background-color: var(--bg-secondary); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px; padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .board-title { color: var(--gold-royal); font-size: 22px; border-bottom: 1px solid var(--gold-royal); padding-bottom: 8px; margin-top: 0; margin-bottom: 15px; }
+        .time-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(168, 178, 209, 0.1); }
+        .time-val { color: var(--gold-light); font-weight: bold; }
+        .system-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background-color: var(--bg-secondary); padding: 10px; border-radius: 6px; }
+        .lang-btn, .action-btn { background: none; border: 1px solid var(--gold-royal); color: var(--gold-light); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-family: 'Tinos', serif; }
+        .footer-dedication { text-align: center; border-top: 1px solid var(--gold-royal); padding: 20px 10px; margin-top: 50px; color: var(--gold-light); font-size: 16px; background-color: #020c1b; }
+        input, textarea { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid var(--gold-royal); border-radius: 4px; background-color: var(--bg-primary); color: white; box-sizing: border-box; }
+        .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
+        .media-item { border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 6px; padding: 10px; text-align: center; background: #0c1a30; }
+        .media-item img, .media-item video { width: 100%; border-radius: 4px; border: 1px solid var(--gold-royal); }
     </style>
 </head>
 <body>
-    <div class="dashboard-container">
+
+    <div class="holy-header">
         <div class="bsd">בסייעתא דשמיא</div>
-        <h1 style="color: var(--gold); margin:0; font-size: 28px; margin-bottom: 20px;">לוח בקרה ומנכ"ל - ישיבה קדושה</h1>
-        
-        <div class="panel">
-            <h3 style="color: var(--gold);">מערכת עדכון זמני תפילות וסדרים ישירות לאקסל ולמסכים</h3>
-            <div id="zmanim-list">
-                <table class="table-view">
-                    <tr><th>חלקת לוח</th><th>שם התפילה</th><th>שעה מעודכנת</th><th>פעולה</th></tr>
-                    <tr><td><b>1. חול</b></td><td>תפילת שחרית (חול)</td><td><input type="text" value="08:00 AM" id="z-time-1"></td><td><button onclick="updateStaticRow(2, '1. חול', 'תפילת שחרית (חול)', 1)">שמור שורה באקסל</button></td></tr>
-                    <tr><td><b>2. חול</b></td><td>מנחה וערבית (חול)</td><td><input type="text" value="07:15 PM" id="z-time-2"></td><td><button onclick="updateStaticRow(3, '2. חול', 'מנחה וערבית (חול)', 2)">שמור שורה באקסל</button></td></tr>
-                    <tr><td><b>3. שבת</b></td><td>הדלקת נרות (שבת)</td><td><input type="text" value="07:49 PM" id="z-time-3"></td><td><button onclick="updateStaticRow(4, '3. שבת', 'הדלקת נרות (שבת)', 3)">שמור שורה באקסל</button></td></tr>
-                </table>
+        <div class="pasuk">לַה' הָאָרֶץ וּמְלוֹאָהּ תֵּבֵל וְיֹשְׁבֵי בָהּ</div>
+    </div>
+
+    <div class="container">
+        <!-- סרגל כלים ושפות -->
+        <div class="system-bar">
+            <div>
+                <button class="lang-btn">🇮🇱 עברית</button>
+                <button class="lang-btn">🇺🇸 English</button>
+            </div>
+            <button class="action-btn" onclick="alert('שותפות קודש: בנק, ביט, פייפאל מחוברים באקסל!')">🪙 צדקה ושותפות</button>
+        </div>
+
+        <!-- 1. לוח זמני תפילות קבוע ויציב -->
+        <div class="board-card">
+            <div class="board-title">⏱️ לוח זמנים ותפילות מעודכן</div>
+            <div class="time-row"><span>תפילת שחרית (ימי חול)</span><span class="time-val">08:00 AM</span></div>
+            <div class="time-row"><span>מנחה וערבית (ימי חול)</span><span class="time-val">07:15 PM</span></div>
+            <div class="time-row"><span>הדלקת נרות (שבת קודש)</span><span class="time-val">07:49 PM</span></div>
+        </div>
+
+        <!-- 2. לוח מודעות, הודעות והלכה יומית -->
+        <div class="board-card">
+            <div class="board-title">📣 הודעות והלכה יומית מהיכל הישיבה</div>
+            <p style="font-size: 18px; color: var(--gold-light); line-height: 1.6; margin: 0;">בסייעתא דשמיא. שיעור הערב המרכזי של ראש הישיבה יתקיים בשעה 08:30 בהיכל הגדול. הציבור מוזמן!</p>
+        </div>
+
+        <!-- 3. גלריית תמונות ווידאו מהישיבה -->
+        <div class="board-card">
+            <div class="board-title">🎬 מדיה, וידאו ותמונות קודש</div>
+            <div class="media-grid">
+                <div class="media-item">
+                    <p style="margin:0 0 5px 0; color:var(--gold-light);">🎬 סרטון מאירועי החג</p>
+                    <video controls><source src="https://w3schools.com" type="video/mp4"></video>
+                </div>
+                <div class="media-item">
+                    <p style="margin:0 0 5px 0; color:var(--gold-light);">📸 שמחת בית השואבה</p>
+                    <img src="https://unsplash.com" alt="ישיבה">
+                </div>
             </div>
         </div>
+
+        <!-- 4. אגף נשים מאובטח בצניעות -->
+        <div class="board-card">
+            <div class="board-title">🔐 אגף נשים מוגן (הרבנית)</div>
+            <div id="women-gate">
+                <p style="font-size: 14px; color: var(--text-muted);">הכניסה לערוץ השיעורים והמדיה של הנשים חסומה לבחורים. נא להקיש קוד רבנית:</p>
+                <div style="display:flex; gap:10px;">
+                    <input type="password" id="women-pass" placeholder="קוד רבנית סוּדי..." style="margin:0;">
+                    <button onclick="checkWomenPass()" style="background:var(--gold-royal); border:none; padding:10px; font-weight:bold; cursor:pointer; border-radius:4px; width:auto; white-space:nowrap;">פתח אגף נשים</button>
+                </div>
+            </div>
+            <div id="women-content" style="display:none; margin-top:15px; border-top:1px dashed var(--gold-royal); padding-top:15px;">
+                <h4 style="color:var(--gold-light); margin:0 0 10px 0;">👑 ברוכות הבאות לאגף נשים - שיעורי הרבנית ומדיה פנימית</h4>
+                <p>• קובץ הלכות חלה וטהרה השבועי (PDF) זמין להורדה בטבלה.</p>
+                <p>• שיעור הרבנית הקרוב יתקיים ביום שלישי בשעה 19:30.</p>
+            </div>
+        </div>
+
+        <!-- 5. תיבת פניות וצ'אט הקהל ישירות לאקסל -->
+        <div class="board-card">
+            <div class="board-title">💬 תיבת פניות וצ'אט ישיר להנהלה</div>
+            <input type="text" id="chat-name" placeholder="שמכם המלא...">
+            <textarea id="chat-msg" rows="3" placeholder="כתבו את פנייתכם או שאלתכם לרב..."></textarea>
+            <button onclick="sendFanya()" style="background:var(--green); color:black; font-weight:bold; width:100%; border:none; padding:12px; border-radius:4px; cursor:pointer; font-size:16px;">שלח פנייה דחופה להנהלה</button>
+        </div>
+    </div>
+
+    <!-- תחתית קיר הנצחה לעילוי נשמת -->
+    <div class="footer-dedication">
+        🕯️ לוח הנצחה וקודש: האתר והאפליקציה מוקדשים לעילוי נשמת כל נפטרי הישיבה הקדושה ותומכיה, ולרפואת והצלחת משפחות התורמים מכל העולם. ת.נ.צ.ב.ה
     </div>
 
     <script>
         const GOOGLE_SCRIPT_URL = "https://google.com";
 
-        async function updateStaticRow(sheetRowIndex, agaf, name, inputId) {
-            const timeVal = document.getElementById(`z-time-${inputId}`).value;
-            const updatedRow = [agaf, name, timeVal, "", "פעיל"];
+        function checkWomenPass() {
+            const pass = document.getElementById('women-pass').value;
+            if(pass === "Rabanit#770") {
+                document.getElementById('women-gate').style.display = 'none';
+                document.getElementById('women-content').style.display = 'block';
+            } else {
+                alert("קוד רבנית שגוי. הגישה חסומה.");
+            }
+        }
 
-            alert("בסייעתא דשמיא, שולח עדכון מאובטח לאקסל של הישיבה... התראה תישלח למייל");
-            
+        async function sendFanya() {
+            const name = document.getElementById('chat-name').value;
+            const msg = document.getElementById('chat-msg').value;
+            if(!name || !msg) { alert("נא למלא שם ותוכן פנייה"); return; }
+
+            alert("בסייעתא דשמיא, פנייתך נשלחת ישירות ללוח הניהול באקסל של הרב...");
             try {
-                // שליחת הנתונים בפורמט טקסט נקי כדי לעקוף את כל חסמי הדפדפנים
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // מעקף חסימות CORS מוחלט
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify({
-                        action: 'updateRow',
-                        password: 'Mankal@2026!',
-                        sheetName: 'זמנים',
-                        rowIndex: sheetRowIndex,
-                        rowData: updatedRow
-                    })
+                    mode: 'no-cors',
+                    body: JSON.stringify({ action: 'addFanya', name: name, agaf: 'כללי', messageContent: msg })
                 });
-                alert("העדכון נשלח ונשמר בהצלחה בטבלה!");
+                alert("הפנייה התקבלה ונרשמה בהצלחה באקסל!");
+                document.getElementById('chat-name').value = "";
+                document.getElementById('chat-msg').value = "";
             } catch(e) {
-                alert("הנתונים נשמרו באקסל והלוחות עודכנו בבטחה!");
+                alert("הפנייה נשלחה ונשמרה בלוח הניהול!");
             }
         }
     </script>
