@@ -1,1 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeshiva Portal - Home Page</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b6cb0;
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+            --text-main: #2d3748;
+            --text-muted: #718096;
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+        .top-bh-bar {
+            background-color: #0f172a;
+            color: #ffffff;
+            text-align: right;
+            padding: 4px 20px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        header {
+            background-color: var(--card-bg);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        header h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        .nav-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .nav-link {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            transition: var(--transition);
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            .nav-bar { grid-template-columns: repeat(2, 1fr); }
+        }
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .section-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        @media (max-width: 480px) {
+            .grid-3 { grid-template-columns: 1fr; }
+        }
+        .role-card {
+            background: #edf2f7;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border-left: 4px solid var(--primary-color);
+        }
+        .role-title { font-weight: bold; color: var(--primary-color); }
+        .role-name { font-size: 0.95rem; margin-top: 5px; color: var(--text-main); }
+        .feed-item {
+            padding: 12px;
+            border-bottom: 1px solid #edf2f7;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .feed-item:last-child { border-bottom: none; }
+        .tag {
+            display: inline-block;
+            background: #e2e8f0;
+            color: var(--primary-color);
+            padding: 2px 8px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            font-weight: bold;
+            width: fit-content;
+        }
+        .dedication-column {
+            background: #fffaf0;
+            border: 1px solid #feebc8;
+            padding: 12px;
+            border-radius: var(--border-radius);
+        }
+        .dedication-column h4 {
+            color: #dd6b20;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            border-bottom: 1px solid #feebc8;
+            padding-bottom: 4px;
+        }
+        .zmanim-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .zmanim-row:last-child { border-bottom: none; }
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 20px;
+            margin-top: 4px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
 
+    <div class="top-bh-bar">B"H</div>
+
+    <header>
+        <h1>Yeshiva Portal</h1>
+        <p>The Central Torah Hub & Digital Beit Midrash</p>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-link active">Home Portal</a>
+        <a href="plan.html" class="nav-link">Study Plan</a>
+        <a href="women.html" class="nav-link">Women's Channel</a>
+        <a href="admin.html" class="nav-link">Admin Panel</a>
+    </nav>
+
+    <div class="container">
+        <div class="main-content">
+            <section class="section-card">
+                <h2 class="section-title">Officials & Management Hierarchy</h2>
+                <div class="grid-3" id="managementHierarchy"></div>
+            </section>
+
+            <section class="section-card">
+                <h2 class="section-title">Announcements & System Updates</h2>
+                <div id="generalAnnouncements"></div>
+            </section>
+
+            <section class="section-card">
+                <h2 class="section-title">Internal Bulletin Board</h2>
+                <div id="internalBulletin"></div>
+            </section>
+
+            <section class="section-card">
+                <h2 class="section-title">Sacred Dedications</h2>
+                <div class="grid-3">
+                    <div class="dedication-column">
+                        <h4>In Memory Of</h4>
+                        <div id="dedicationsMemory"></div>
+                    </div>
+                    <div class="dedication-column">
+                        <h4>For Health & Success</h4>
+                        <div id="dedicationsHealth"></div>
+                    </div>
+                    <div class="dedication-column">
+                        <h4>With Gratitude</h4>
+                        <div id="dedicationsGratitude"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="sidebar">
+            <section class="section-card">
+                <h2 class="section-title">Daily Zmanim Schedule</h2>
+                <div id="zmanimDisplay"></div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <p>Official Institutional Portal &copy; All Rights Reserved</p>
+    </footer>
+
+    <script>
+        const initialZmanim = [
+            { title: "Alot HaShachar", time: "05:12 AM" },
+            { title: "Netz Hachamah", time: "06:24 AM" },
+            { title: "Sof Zman Kriyat Shema", time: "09:15 AM" },
+            { title: "Chatzot Hayom", time: "12:40 PM" },
+            { title: "Mincha Gedolah", time: "01:15 PM" },
+            { title: "Plag HaMincha", time: "05:45 PM" },
+            { title: "Shkiat HaChamah", time: "07:02 PM" },
+            { title: "Tzeit HaKochavim", time: "07:38 PM" }
+        ];
+
+        if (!localStorage.getItem('zmanim_list')) {
+            localStorage.setItem('zmanim_list', JSON.stringify(initialZmanim));
+        }
+
+        const roles = [
+            { id: 1, title: "General CEO", name: "Rabbi Abraham Goldstein", page: "general" },
+            { id: 3, title: "Certified Director - Men", name: "Rabbi Chaim Levin", page: "general" },
+            { id: 5, title: "Deputy Manager - Men", name: "Nathan Myers", page: "general" }
+        ];
+
+        function initPage() {
+            const zmanim = JSON.parse(localStorage.getItem('zmanim_list'));
+            const zmanimBox = document.getElementById('zmanimDisplay');
+            zmanimBox.innerHTML = zmanim.map(z => `
+                <div class="zmanim-row">
+                    <strong>${z.title}</strong>
+                    <span>${z.time}</span>
+                </div>
+            `).join('');
+
+            const rolesGrid = document.getElementById('managementHierarchy');
+            rolesGrid.innerHTML = roles.map(r => `
+                <div class="role-card">
+                    <div class="role-title">${r.title}</div>
+                    <div class="role-name">${r.name}</div>
+                </div>
+            `).join('');
+
+            const notices = JSON.parse(localStorage.getItem('notices_index')) || [
+                { text: "Morning Talmud Seder starts sharp at 09:00 AM in the Main Hall.", tag: "Seder" },
+                { text: "Special evening lecture by the Rosh Yeshiva tonight at 08:30 PM.", tag: "Event" }
+            ];
+            document.getElementById('generalAnnouncements').innerHTML = notices.map(n => `
+                <div class="feed-item">
+                    <span class="tag">${n.tag}</span>
+                    <p>${n.text}</p>
+                </div>
+            `).join('');
+const messages = JSON.parse(localStorage.getItem('messages_index')) || [{ text: "Chavruta registrations for the upcoming winter Zman close this Thursday.", tag: "Logistics" }];document.getElementById('internalBulletin').innerHTML = messages.map(m => <div class="feed-item"> <span class="tag">${m.tag || 'Notice'}</span> <p>${m.text}</p> </div>).join('');const dedications = JSON.parse(localStorage.getItem('dedication_index')) || [{ text: "Ben Benjamin ben Abraham", type: "memory" },{ text: "Sarah bat Chana for a complete recovery", type: "health" },{ text: "The Cohen Family for their generous support", type: "gratitude" }];document.getElementById('dedicationsMemory').innerHTML = dedications.filter(d => d.type === 'memory').map(d => <p style="margin-bottom:6px; font-size:0.9rem;">&bull; ${d.text}</p>).join('') || 'No entries';document.getElementById('dedicationsHealth').innerHTML = dedications.filter(d => d.type === 'health').map(d => <p style="margin-bottom:6px; font-size:0.9rem;">&bull; ${d.text}</p>).join('') || 'No entries';document.getElementById('dedicationsGratitude').innerHTML = dedications.filter(d => d.type === 'gratitude').map(d => <p style="margin-bottom:6px; font-size:0.9rem;">&bull; ${d.text}</p>).join('') || 'No entries';}window.onload = initPage;
