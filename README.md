@@ -1,48 +1,28 @@
 # yeshiva-app
-בס"ד
-
-# 🏛️ פורטל הישיבה המרכזי - תיעוד ארכיטקטורת המערכת
-
-ברוכים הבאים לקובץ התיעוד הרשמי של פורטל המוסדות. מערכת זו נבנתה מאפס בצורה מודולרית, נקייה ומפוארת, על מנת לרכז את כלל התכנים הרוחניים, הלימודיים והתפעוליים של הישיבה והמדרשה בתיאום מושלם וללא ערבוב קוד.
-
-## 📁 מבנה הקבצים וחלוקת הערוצים
-
-המערכת מורכבת מ-4 קבצי HTML עצמאיים המקושרים ביניהם דרך **שורת הערוצים המרכזית** בכל דף:
-
-1. **`index.html`** - דף הבית הראשי (גברים / כללי). מרכז את זמני היום בהלכה, הודעות כלליות, לוח מודעות והקדשות.
-2. **`plan.html`** - תוכנית הלימודים הרשמית ומערכת השעות של הישיבה המפרטת את סדרי העיון, הבקיאות וההלכה.
-3. **`women.html`** - ערוץ הנשים המפואר והייעודי בפיקוח הרבנית. מותאם עיצובית ותוכנית לצרכי בנות המדרשה.
-4. **`admin.html`** - פנל הניהול והפיקוח המוסמך של הנהלת המוסדות לעדכון תכנים, הודעות וזמנים בזמן אמת.
-
+in sd
 ---
 
-## 🔝 מבנה קוד היררכי אחיד (מלמעלה למטה)
+### 5. `README.md` (Official System Documentation)
+```markdown
+# Official Yeshiva Portal System Documentation
 
-כל הקבצים בפרויקט שומרים על סדר פיתוח קפדני ואחיד בתוך קובץ אחד (ללא ערבוב) לפי הסדר הבא:
-1. **שורת בס"ד עליונה:** מובנית בראש כל קוד כסימן ברכה ושמירה.
-2. **שורת שפות רשמית:** מונחת בתוך ה-Header המרכזי לתמיכה במספר שפות (עברית, אנגלית, צרפתית, ספרדית).
-3. **סרגל ערוצי ניווט:** תפריט עליון מהיר למעבר חלק בין ארבעת חלקי המערכת.
-4. **חלוקת תפקידים מוסמכת:** הצגת בעלי התפקידים המפקחים לפי היררכיה ברורה ומדויקת.
-5. **לוח הודעות מערכת:** עדכונים שוטפים מההנהלה בחלוקה לפי תגיות נושא וסנכרן LocalStorage.
-6. **לוח מודעות פנימי:** מודעות פנים-ישיבתיות, אבדות ומציאות ושיבוצים.
-7. **בלוק הקדשות, הנצחות וברכות:** אזור מפואר המחולק לשלושה נתיבים: *לעילוי נשמת*, *לרפואה והצלחה*, ו*הוקרת תודה*.
-8. **לוח זמנים:** שעון זמני היום בהלכה או זמני סדרי לימוד קבועים.
+This standalone client-side system operates completely under a decoupled architecture using pure web technologies (HTML5, CSS3, and modern JavaScript) synchronized locally via localized browser state storage pipelines (`LocalStorage`).
 
----
+## 📁 System Blueprint & Application Mapping
+1. **index.html**: General hub showcasing default institutional announcements, internal bulletin rosters, cross-channel navigation widgets, hierarchical role charts for Men/General components, and multi-tier dedication tables alongside the operational shared Zmanim display panel.
+2. **plan.html**: Structural curriculum monitoring engine detailing the central learning blocks (Sedarim schedule blocks) sync-injected through the core dynamic database parameters.
+3. **women.html**: Specialized isolated environment (Midrasha Portal) for exclusive publishing paths containing explicit leadership layers, local dedication matrices, and distinct information bulletin frameworks.
+4. **admin.html**: High-authority state manager enabling precise database overrides, strict form rule checks, and localized data creation operations based on pre-allocated staff operational clearance tiers.
 
-## 👥 mפת בעלי התפקידים והרשאות בניהול (`admin.html`)
+## 👥 Roles & Security Scopes
+* **General CEO**: Full-spectrum read/write parameters overriding any access security barrier in the system.
+* **Yeshiva Rabbanit**: Prime control path supervisor authorized to manipulate all nodes bound to `women.html` target strings.
+* **Certified Directors (Men / Women)**: Middle-tier administrative operators executing targeted feed adjustments inside their authorized structural division.
+* **Deputy Managers (Men / Women)**: Local operational support personnel allowed to dispatch update logs strictly under regional page constraints.
 
-המערכת מגדירה היררכיית ניהול מובנית ומדויקת עבור בעלי התפקידים הבאים:
-* **מנכ"ל המוסדות:** הסמכות העליונה במוסדות. בעל הרשאה כוללת לעדכון כלל הדפים והטפסים במערכת.
-* **רבנית הישיבה:** המנהלת הרוחנית והסמכות הבכירה ביותר במדרשת הנשים, שנייה בהיררכיה הכללית מיד לאחר המנכ"ל.
-* **מנהל מוסמך (גברים):** אחראי תפעול וסדר רוחני של הישיבה וסדרי הלימוד של הגברים.
-* **מנהל מוסמך (נשים):** אחראית תפעול, רישום ותוכן לימודי של מחלקת הנשים והמדרשה.
-* **מנהל משנה (גברים):** רכז לוגיסטיקה, מערכת וסיוע תפעולי במחלקת הגברים בלבד.
-* **מנהלת משנה (נשים):** רכזת אירועים, אירוח, רישום וסיוע לוגיסטי במחלקת הנשים בלבד.
-
----
-
-## 🛠️ הנחיות תחזוקה והרצה
-* כל קובץ הוא קובץ עצמאי לחלוטין (Standalone) המכיל בתוכו את עיצובי ה-CSS וה-JavaScript שלו בסדר מופתי.
-* המערכת משתמשת ב-LocalStorage על מנת לסנכרן נתונים בין פנל הניהול לבין שאר הדפים ללא צורך בשרת מורכב.
-* כדי להריץ את המערכת, יש לוודא שכל הקבצים נמצאים באותה התיקייה בשרת או ב-GitHub Pages, ולפתוח את `index.html` בכל דפדפן.
+## 📊 Database Configuration (LocalStorage Schema)
+* `zmanim_list`: Core array block shared system-wide for halachic times synchronization.
+* `notices_index` / `messages_index`: Stream arrays rendering structural texts inside the Home Page portal.
+* `messages_plan`: Curriculum warning streams rendering strictly under `plan.html` logic rules.
+* `notices_women` / `messages_women`: Dynamic array objects outputting feed containers inside the isolated Women's channel layout.
+* `dedication_index` / `dedication_women`: Structured entities managing the commemorative grids segregated by localized page layouts.
