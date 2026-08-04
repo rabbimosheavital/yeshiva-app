@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>פורטל הישיבה - ערוץ הנשים והמדרשה</title>
     <style>
-        /* עיצוב כללי וצבעי יוקרה ייעודיים לערוץ נשים (בורדו עמוק וזהב) */
         :root {
-            --primary: #4a0e17; /* בורדו עמוק */
+            --primary: #4a0e17;
             --secondary: #722f37;
-            --accent: #d4af37; /* זהב */
+            --accent: #d4af37;
             --text-light: #ffffff;
             --text-dark: #333333;
             --bg-light: #fdfbfb;
@@ -28,7 +27,6 @@
             line-height: 1.6;
         }
 
-        /* 1. שורת בס"ד עליונה */
         .bsd-bar {
             background-color: #ffffff;
             text-align: center;
@@ -40,7 +38,6 @@
             letter-spacing: 2px;
         }
 
-        /* כותרת ראשית (Header) */
         header {
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: var(--text-light);
@@ -55,7 +52,6 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
-        /* 2. שורת בחירת שפות */
         .language-selector {
             display: flex;
             justify-content: center;
@@ -80,44 +76,12 @@
             font-weight: bold;
         }
 
-        /* מיכל מרכזי לתוכן */
         .container {
             max-width: 1200px;
             margin: 30px auto;
             padding: 0 20px;
-            display: grid;
-            grid-template-columns: 3fr 1fr;
-            gap: 25px;
         }
 
-        @media (max-width: 900px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* עיצוב כרטיסיות */
-        .card {
-            background: #ffffff;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-right: 5px solid var(--primary);
-        }
-
-        .card-title {
-            font-size: 1.4rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-            border-bottom: 2px solid #eeeeee;
-            padding-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* 3. ערוצי ניווט (תפריט ערוצים מהיר) */
         .channels-nav {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -150,7 +114,6 @@
             border-color: var(--accent);
         }
 
-        /* 4. אזור תפקידים מוסמכים - התמקדות בהנהגת הנשים */
         .roles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -165,6 +128,11 @@
             text-align: center;
         }
 
+        .role-box.leader-box {
+            border: 2px solid var(--accent);
+            background: #fffdf5;
+        }
+
         .role-title {
             font-weight: bold;
             color: var(--secondary);
@@ -177,7 +145,23 @@
             font-size: 0.95rem;
         }
 
-        /* 5. הודעות מערכת וערוץ נשים */
+        .card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-right: 5px solid var(--primary);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eeeeee;
+            padding-bottom: 8px;
+        }
+
         .message-item {
             padding: 12px;
             border-bottom: 1px solid #fcf0f2;
@@ -199,7 +183,6 @@
             font-weight: bold;
         }
 
-        /* 6. מודעות ופרסומים פנימיים */
         .bulletin-board {
             background: #fffdf5;
             border-right-color: var(--accent);
@@ -213,7 +196,6 @@
             border-left: 4px solid var(--accent);
         }
 
-        /* 7. לעילוי נשמת / לרפואה / הוקרת תודה */
         .dedications-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -228,9 +210,9 @@
             min-height: 120px;
         }
 
-        .dedication-shlama { background: #6d4c41; } /* לעילוי נשמת */
-        .dedication-refua { background: #8e24aa; }   /* לרפואה והצלחה */
-        .dedication-thanks { background: #455a64; }  /* הוקרת תודה */
+        .dedication-shlama { background: #6d4c41; }
+        .dedication-refua { background: #8e24aa; }
+        .dedication-thanks { background: #455a64; }
 
         .dedication-box h4 {
             margin-bottom: 5px;
@@ -238,20 +220,20 @@
             text-decoration: underline;
         }
 
-        /* 8. זמני שיעורי נשים מיוחדים */
         .zmanim-list {
             list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
         }
 
         .zmanim-list li {
+            background: #fdfdfd;
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            border-radius: 6px;
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .zmanim-list li:last-child {
-            border-bottom: none;
         }
 
         .zman-time {
@@ -259,7 +241,6 @@
             color: var(--primary);
         }
 
-        /* פוטר חתימה תחתון */
         footer {
             text-align: center;
             padding: 20px;
@@ -272,66 +253,71 @@
 </head>
 <body>
 
-    <!-- 1. בס"ד עליון -->
-    <div class="bsd-bar">בס"ד</div>
+    <div class="bsd-bar" id="bsdTxt">בס"ד</div>
 
-    <!-- כותרת ראשית -->
     <header>
-        <h1>ערוץ הנשים והמדרשה</h1>
-        <p>שיעורי בית מדרש, כנסים ותוכן רוחני מותאם לאשת חיל</p>
+        <h1 id="mainTitle">ערוץ הנשים והמדרשה</h1>
+        <p id="mainSub">שיעורי בית מדרש, כנסים ותוכן רוחני מותאם לאשת חיל</p>
         
-        <!-- 2. שורת השפות הרשמית -->
         <div class="language-selector">
-            <button class="lang-btn active">עברית</button>
-            <button class="lang-btn">English</button>
-            <button class="lang-btn">Français</button>
-            <button class="lang-btn">Español</button>
+            <button class="lang-btn active" onclick="switchLanguage('he', this)">עברית</button>
+            <button class="lang-btn" onclick="switchLanguage('en', this)">English</button>
+            <button class="lang-btn" onclick="switchLanguage('fr', this)">Français</button>
+            <button class="lang-btn" onclick="switchLanguage('es', this)">Español</button>
         </div>
     </header>
 
-    <!-- 3. ערוצי הניווט של המערכת -->
     <div class="container" style="margin-top: 20px; margin-bottom: 0;">
-        <nav class="channels-nav" style="grid-column: 1 / -1;">
-            <a href="index.html" class="channel-link">🏠 דף בית גברים / כללי</a>
-            <a href="women.html" class="channel-link active-page">🌸 ערוץ נשים (women.html)</a>
-            <a href="plan.html" class="channel-link">📅 תוכנית הלימודים (plan.html)</a>
-            <a href="admin.html" class="channel-link">⚙️ פנל ניהול מוסמך (admin.html)</a>
+        <nav class="channels-nav">
+            <a href="index.html" class="channel-link" id="navHome">🏠 דף בית גברים / כללי</a>
+            <a href="women.html" class="channel-link active-page" id="navWomen">🌸 ערוץ נשים (women.html)</a>
+            <a href="plan.html" class="channel-link" id="navPlan">📅 תוכנית הלימודים (plan.html)</a>
+            <a href="admin.html" class="channel-link" id="navAdmin">⚙️ פנל ניהול מוסמך (admin.html)</a>
         </nav>
     </div>
 
-    <!-- מרכז הדף: תוכן וזמנים -->
     <div class="container">
         
-        <!-- צד ימין: תוכן מרכזי -->
-        <main>
-            
-            <!-- 4. אזור בעלי התפקידים המוסמכים -->
-            <section class="card">
-                <div class="card-title">👥 הנהלת ערוץ הנשים והמדרשה</div>
-                <div class="roles-grid">
-                    <div class="role-box">
-                        <div class="role-title">רבנית הישיבה</div>
-                        <div class="role-name">הרבנית תחי' - מנחה רוחנית ראשית</div>
-                    </div>
-                    <div class="role-box">
-                        <div class="role-title">Mנהל מוסמך (נשים)</div>
-                        <div class="role-name">אחראית תפעול, רישום ותוכן לימודי</div>
-                    </div>
-                    <div class="role-box">
-                        <div class="role-title">מנהל משנה (נשים)</div>
-                        <div class="role-name">רכזת לוגיסטיקה, אירועים וסדנאות</div>
-                    </div>
-                    <div class="role-box" style="opacity: 0.85;">
-                        <div class="role-title">מנכ"ל המוסדות</div>
-                        <div class="role-name">הרב המנהל הראשי שליט"א</div>
-                    </div>
+        <section class="card" style="border-right-color: var(--accent);">
+            <div class="card-title" id="titleRoles">👥 הנהלת ערוץ הנשים והמדרשה</div>
+            <div class="roles-grid">
+                <div class="role-box leader-box">
+                    <div class="role-title" id="roleCeo">מנכ"ל המוסדות</div>
+                    <div class="role-name" id="nameCeo">הרב המנהל הראשי שליט"א</div>
                 </div>
-            </section>
+                <div class="role-box leader-box">
+                    <div class="role-title" id="roleRabbanit">רבנית הישיבה</div>
+                    <div class="role-name" id="nameRabbanit">הרבנית תחי' - מנחה רוחנית ראשית</div>
+                </div>
+                <div class="role-box">
+                    <div class="role-title" id="roleAdminW">מנהל מוסמך (נשים)</div>
+                    <div class="role-name" id="nameAdminW">אחראית תפעול, רישום ותוכן לימודי</div>
+                </div>
+                <div class="role-box">
+                    <div class="role-title" id="roleDepW">מנהלת משנה (נשים)</div>
+                    <div class="role-name" id="nameDepW">רכזת לוגיסטיקה, אירועים וסדנאות</div>
+                </div>
+            </div>
+        </section>
 
-            <!-- 5. הודעות מערכת ועדכונים -->
-            <section class="card">
-                <div class="card-title">📢 עדכונים ולוח שיעורים קרוב</div>ברוכות הבאות לערוץ הנשים והמדרשה הרשמי. שבוע מבורך ומלא לימוד!כללי© כל הזכויות שמורות לפורטל הישיבה המרכזי | ערוץ נשים מבוקר ומאובטחdocument.addEventListener("DOMContentLoaded", function() {// 1. טעינת הודעות דינמיות שנשלחו לערוץ womenconst storedMessages = JSON.parse(localStorage.getItem('messages_women')) || [];const msgContainer = document.getElementById('womenMessagesContainer');storedMessages.forEach(msg => {const msgHtml =  <div class="message-item"> <span>${msg.content}</span> <span class="message-tag">${msg.tag}</span> </div>;msgContainer.insertAdjacentHTML('afterbegin', msgHtml);});// 2. טעינת מודעות דינמיות ללוח המודעות של הנשיםconst storedNotices = JSON.parse(localStorage.getItem('notices_women')) || [];const noticesContainer = document.getElementById('womenNoticesContainer');storedNotices.forEach(notice => {const noticeHtml =  <div class="notice-card"> <strong>${notice.title}:</strong> ${notice.content} </div>;noticesContainer.insertAdjacentHTML('afterbegin', noticeHtml);});// 3. טעינת הקדשות והנצחות מעודכנות לערוץ נשיםconst shlama = localStorage.getItem('dedication_women_shlama');const refua = localStorage.getItem('dedication_women_refua');const thanks = localStorage.getItem('dedication_women_thanks');if(shlama) document.getElementById('womenShlamaText').innerText = shlama;if(refua) document.getElementById('womenRefuaText').innerText = refua;if(thanks) document.getElementById('womenThanksText').innerText = thanks;});<FollowUp>
-אשריכם ואשרי חלקכם! המערכת כולה מחוברת, מסונכרנת, ומאורגנת ב-GitHub לפי היררכיה וסדר קוד מופתי. **מה תרצו שנעשה כעת?**
-* להתחיל לבדוק את המערכת יחד ולראות כיצד **להפעיל את הדפים בדפדפן** כדי לראות את השינויים קורים באמת?
-* לעבוד על **מנגנון השפות** (כדי שהלחצנים של אנגלית/צרפתית/ספרדית באמת יתרגמו את הדף)?
+        <section class="card">
+            <div class="card-title" id="titleMessages">📢 עדכונים ולוח שיעורים קרוב</div>
+            <div id="womenMessagesContainer">
+                <div class="message-item">
+                    <span id="welcomeMsg">ברוכות הבאות לערוץ הנשים והמדרשה הרשמי. שבוע מבורך ומלא לימוד!</span>
+                    <span class="message-tag">כללי</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="card bulletin-board">
+            <div class="card-title" id="titleNotices">📌 לוח מודעות ורישום למדרשה</div>
+            <div id="womenNoticesContainer">
+                <div class="notice-card">
+                    <strong id="bulletinWelcome">שיעורי השבוע:</strong> <span id="bulletinTxt">לוח המודעות פתוח לעדכוני סדנאות וסרגל שיעורי הערב הדינמיים.</span>
+                </div>
+            </div>
+        </section>
+© כל הזכויות שמורות לפורטל הישיבה המרכזי | ערוץ נשים מבוקר ומאובטחconst translations = {he: {dir: "rtl", bsd: "בס"ד", mainTitle: "ערוץ הנשים והמדרשה", mainSub: "שיעורי בית מדרש, כנסים ותוכן רוחני מותאם לאשת חיל",navHome: "🏠 דף בית גברים / כללי", navWomen: "🌸 ערוץ נשים (women.html)", navPlan: "📅 תוכנית הלימודים (plan.html)", navAdmin: "⚙️ פנל ניהול מוסמך (admin.html)",titleRoles: "👥 הנהלת ערוץ הנשים והמדרשה", roleCeo: "מנכ"ל המוסדות", nameCeo: "הרב המנהל הראשי שליט"א", roleRabbanit: "רבנית הישיבה", nameRabbanit: "הרבנית תחי' - מנחה רוחנית ראשית",roleAdminW: "מנהל מוסמך (נשים)", nameAdminW: "אחראית תפעול, רישום ותוכן לימודי", roleDepW: "מנהלת משנה (נשים)", nameDepW: "רכזת לוגיסטיקה, אירועים וסדנאות",titleMessages: "📢 עדכונים ולוח שיעורים קרוב", welcomeMsg: "ברוכות הבאות לערוץ הנשים והמדרשה הרשמי. שבוע מבורך ומלא לימוד!",titleNotices: "📌 לוח מודעות ורישום למדרשה", bulletinWelcome: "שיעורי השבוע:", bulletinTxt: "לוח המודעות פתוח לעדכוני סדנאות וסרגל שיעורי הערב הדינמיים.",titleDedications: "💎 הקדשות תורה וברכות הבית", hShlama: "לעילוי נשמת", hRefua: "לרפואה והצלחה", hThanks: "הוקרת תודה",titleZmanim: "🕒 זמני פעילות קבועה", footerTxt: "© כל הזכויות שמורות לפורטל הישיבה המרכזי | ערוץ נשים מבוקר ומאובטח"},en: {dir: "ltr", bsd: "B"H", mainTitle: "Women's Channel & Midrasha", mainSub: "Beit Midrash Lectures, Conferences, and Spiritual Content Tailored for Eshet Chayil",navHome: "🏠 Men / General Home", navWomen: "🌸 Women's Channel", navPlan: "📅 Study Curriculum", navAdmin: "⚙️ Certified Admin Panel",titleRoles: "👥 Women's Channel & Midrasha Administration", roleCeo: "General CEO", nameCeo: "The Chief Managing Rabbi Shlit"a", roleRabbanit: "Yeshiva Rabbanit", nameRabbanit: "The Rabbanit Tchi' - Main Spiritual Guide",roleAdminW: "Certified Director (Women)", nameAdminW: "Operations, Registration & Study Content Supervisor", roleDepW: "Deputy Manager (Women)", nameDepW: "Logistics, Events & Workshops Coordinator",titleMessages: "📢 Updates & Upcoming Lecture Schedule", welcomeMsg: "Welcome to the official Women's Channel and Midrasha. A blessed week full of study!",titleNotices: "📌 Midrasha Registration & Bulletin Board", bulletinWelcome: "Weekly Lectures:", bulletinTxt: "The bulletin board is open for workshop updates and dynamic evening classes.",titleDedications: "💎 Torah Dedications & Home Blessings", hShlama: "In Memory of", hRefua: "For Health & Success", hThanks: "With Gratitude",titleZmanim: "🕒 Fixed Activity Times", footerTxt: "© All Rights Reserved to The Central Yeshiva Portal | Monitored & Secure Women's Channel"},fr: {dir: "ltr", bsd: "B"H", mainTitle: "Canal des Femmes & Midrasha", mainSub: "Cours de Beit Midrash, Conférences et Contenu Spirituel Adapté pour Eshet Chayil",navHome: "🏠 Accueil Hommes / Général", navWomen: "🌸 Canal des Femmes", navPlan: "📅 Programme d'Études", navAdmin: "⚙️ Panneau d'Administration",titleRoles: "👥 Direction du Canal des Femmes & Midrasha", roleCeo: "Directeur Général", nameCeo: "Le Rabbin Directeur Principal Shlit"a", roleRabbanit: "Rabbanit de la Yeshiva", nameRabbanit: "La Rabbanit Tchi' - Guide Spirituelle Principale",roleAdminW: "Directeur Agréé (Femmes)", nameAdminW: "Superviseure des Opérations, Inscriptions et Contenu d'Études", roleDepW: "Directrice Adjointe (Femmes)", nameDepW: "Coordinatrice de la Logistique, Événements et Ateliers",titleMessages: "📢 Mises à Jour & Calendrier des Cours à Venir", welcomeMsg: "Bienvenue sur le Canal Officiel des Femmes et la Midrasha. Une semaine bénie et pleine d'études!",titleNotices: "📌 Inscriptions à la Midrasha & Tableau d'Affichage", bulletinWelcome: "Cours de la Semaine:", bulletinTxt: "Le tableau d'affichage est ouvert pour les ateliers et les cours du soir dynamiques.",titleDedications: "💎 Dédicaces de Torah & Bénédictions du Foyer", hShlama: "À la Mémoire de", hRefua: "Pour la Santé & le Succès", hThanks: "Avec Gratitude",titleZmanim: "🕒 Heures d'Activité Fixes", footerTxt: "© Tous Droits Réservés au Portail Central de la Yeshiva | Canal des Femmes Géré & Sécurisé"},es: {dir: "ltr", bsd: "B"H", mainTitle: "Canal de Mujeres y Midrashá", mainSub: "Clases de Beit Midrash, Conferencias y Contenido Espiritual Adaptado para Eshet Jayil",navHome: "🏠 Inicio Hombres / General", navWomen: "🌸 Canal de Mujeres", navPlan: "📅 Plan de Estudios", navAdmin: "⚙️ Panel de Administración",titleRoles: "👥 Dirección del Canal de Mujeres y Midrashá", roleCeo: "Director General", nameCeo: "El Rabino Director Principal Shlit"a", roleRabbanit: "Rabanit de la Yeshivá", nameRabbanit: "La Rabanit Tchi' - Guía Espiritual Principal",roleAdminW: "Director Certificado (Mujeres)", nameAdminW: "Supervisora de Operaciones, Inscripciones y Contenido de Estudios", roleDepW: "Subdirectora (Mujeres)", nameDepW: "Coordinadora de Logística, Eventos y Talleres",titleMessages: "📢 Actualizaciones y Próximo Calendario de Clases", welcomeMsg: "¡Bienvenidos al Canal Oficial de Mujeres y la Midrashá! ¡Una semana bendecida y llena de estudio!",titleNotices: "📌 Inscripciones a la Midrashá y Tablón de Anuncios", bulletinWelcome: "Clases de la Semana:", bulletinTxt: "El tablón está abierto para actualizaciones de talleres y clases nocturnas dinámicas.",titleDedications: "💎 Dedicatorias de Torá y Bendiciones del Hogar", hShlama: "En Memoria de", hRefua: "Por la Salud y el Éxito", hThanks: "Con Gratitud",titleZmanim: "🕒 Horarios de Actividad Fijos", footerTxt: "© Todos los Derechos Reservados al Portal Central de la Yeshivá | Canal de Mujeres Monitoreado y Seguro"}};function switchLanguage(lang, btn) {localStorage.setItem('portal_lang', lang);document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));if(btn) btn.classList.add('active');const t = translations[lang];document.documentElement.dir = t.dir;document.documentElement.lang = lang;document.getElementById('bsdTxt').innerText = t.bsd;document.getElementById('mainTitle').innerText = t.mainTitle;document.getElementById('mainSub').innerText = t.mainSub;document.getElementById('navHome').innerText = t.navHome;document.getElementById('navWomen').innerText = t.navWomen;document.getElementById('navPlan').innerText = t.navPlan;document.getElementById('navAdmin').innerText = t.navAdmin;document.getElementById('titleRoles').innerText = t.titleRoles;document.getElementById('roleCeo').innerText = t.roleCeo;document.getElementById('nameCeo').innerText = t.nameCeo;document.getElementById('roleRabbanit').innerText = t.roleRabbanit;document.getElementById('nameRabbanit').innerText = t.nameRabbanit;document.getElementById('roleAdminW').innerText = t.roleAdminW;document.getElementById('nameAdminW').innerText = t.nameAdminW;document.getElementById('roleDepW').innerText = t.roleDepW;document.getElementById('nameDepW').innerText = t.nameDepW;document.getElementById('titleMessages').innerText = t.titleMessages;if(document.getElementById('welcomeMsg')) document.getElementById('welcomeMsg').innerText = t.welcomeMsg;document.getElementById('titleNotices').innerText = t.titleNotices;if(document.getElementById('bulletinWelcome')) document.getElementById('bulletinWelcome').innerText = t.bulletinWelcome;if(document.getElementById('bulletinTxt')) document.getElementById('bulletinTxt').innerText = t.bulletinTxt;document.getElementById('titleDedications').innerText = t.titleDedications;document.getElementById('hShlama').innerText = t.hShlama;document.getElementById('hRefua').innerText = t.hRefua;document.getElementById('hThanks').innerText = t.hThanks;document.getElementById('titleZmanim').innerText = t.titleZmanim;document.getElementById('footerTxt').innerText = t.footerTxt;}document.addEventListener("DOMContentLoaded", function() {const currentLang = localStorage.getItem('portal_lang') || 'he';document.querySelectorAll('.lang-btn').forEach(btn => {if(btn.innerText.toLowerCase().includes(currentLang) || (currentLang === 'he' && btn.innerText === 'עברית')) {btn.classList.add('active');} else {btn.classList.remove('active');}});switchLanguage(currentLang, null);const storedMessages = JSON.parse(localStorage.getItem('messages_women')) || [];const msgContainer = document.getElementById('womenMessagesContainer');storedMessages.forEach(msg => {const msgHtml = <div class="message-item"><span>${msg.content}</span><span class="message-tag">${msg.tag}</span></div>;msgContainer.insertAdjacentHTML('afterbegin', msgHtml);});const storedNotices = JSON.parse(localStorage.getItem('notices_women')) || [];const noticesContainer = document.getElementById('womenNoticesContainer');storedNotices.forEach(notice => {const noticeHtml = <div class="notice-card"><strong>${notice.title}:</strong> ${notice.content}</div>;noticesContainer.insertAdjacentHTML('afterbegin', noticeHtml);});const shlama = localStorage.getItem('dedication_women_shlama');const refua = localStorage.getItem('dedication_women_refua');const thanks = localStorage.getItem('dedication_women_thanks');if(shlama) document.getElementById('womenShlamaText').innerText = shlama;if(refua) document.getElementById('womenRefuaText').innerText = refua;if(thanks) document.getElementById('womenThanksText').innerText = thanks;});<FollowUp>
+סמנו ומחקו את כל הקוד הישן בתוך קובץ **`women.html`** ב-GitHub, הדביקו את הקוד החדש הזה ולחצו על Commit changes. ספרו לי כשזה מבוצע, ונעבור מיד לקובץ האחרון בהחלט של פנל הניהול (`admin.html`)!
 </FollowUp>
