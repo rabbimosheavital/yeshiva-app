@@ -225,6 +225,7 @@
             border-radius: 6px;
             color: #fff;
             text-align: center;
+            min-height: 120px;
         }
 
         .dedication-shlama { background: #6d4c41; } /* לעילוי נשמת */
@@ -288,7 +289,7 @@
         </div>
     </header>
 
-    <!-- 3. ערוצי הניווט של המערכת (מעבר חלק בין הקבצים) -->
+    <!-- 3. ערוצי הניווט של המערכת -->
     <div class="container" style="margin-top: 20px; margin-bottom: 0;">
         <nav class="channels-nav" style="grid-column: 1 / -1;">
             <a href="index.html" class="channel-link">🏠 דף בית גברים / כללי</a>
@@ -304,7 +305,7 @@
         <!-- צד ימין: תוכן מרכזי -->
         <main>
             
-            <!-- 4. אזור בעלי התפקידים המוסמכים - דגש על מחלקת נשים ומנכ"ל המוסדות -->
+            <!-- 4. אזור בעלי התפקידים המוסמכים -->
             <section class="card">
                 <div class="card-title">👥 הנהלת ערוץ הנשים והמדרשה</div>
                 <div class="roles-grid">
@@ -313,7 +314,7 @@
                         <div class="role-name">הרבנית תחי' - מנחה רוחנית ראשית</div>
                     </div>
                     <div class="role-box">
-                        <div class="role-title">מנהל מוסמך (נשים)</div>
+                        <div class="role-title">Mנהל מוסמך (נשים)</div>
                         <div class="role-name">אחראית תפעול, רישום ותוכן לימודי</div>
                     </div>
                     <div class="role-box">
@@ -329,6 +330,8 @@
 
             <!-- 5. הודעות מערכת ועדכונים -->
             <section class="card">
-                <div class="card-title">📢 עדכונים ולוח שיעורים קרוב</div>הסתיימה בניית שלב 3: התאמת ערוץ הנשים לקבצי המערכת בהצלחה.קודסדרת מפגשי ערב בנושא "בית יהודי מאושר" בהנחיית הרבנית תחל ביום שלישי.סדנאותשיעור הלכה מיוחד בהלכות שבת וברכות הבית יתקיים באולם המדרשה החדש.הלכה© כל הזכויות שמורות לפורטל הישיבה המרכזי | ערוץ נשים מבוקר ומאובטח<FollowUp>
-ערוץ הנשים (`women.html`) מוכן ומעוצב בצורה מפוארת לחלוטין! האם אנו מוכנים לעבור כעת אל השלב הבא והאחרון ברשימה הישירה שלכם: **`admin.html` (פנל הניהול המוסמך והמאובטח של הישיבה לקביעת תפקידים והודעות)**?
+                <div class="card-title">📢 עדכונים ולוח שיעורים קרוב</div>ברוכות הבאות לערוץ הנשים והמדרשה הרשמי. שבוע מבורך ומלא לימוד!כללי© כל הזכויות שמורות לפורטל הישיבה המרכזי | ערוץ נשים מבוקר ומאובטחdocument.addEventListener("DOMContentLoaded", function() {// 1. טעינת הודעות דינמיות שנשלחו לערוץ womenconst storedMessages = JSON.parse(localStorage.getItem('messages_women')) || [];const msgContainer = document.getElementById('womenMessagesContainer');storedMessages.forEach(msg => {const msgHtml =  <div class="message-item"> <span>${msg.content}</span> <span class="message-tag">${msg.tag}</span> </div>;msgContainer.insertAdjacentHTML('afterbegin', msgHtml);});// 2. טעינת מודעות דינמיות ללוח המודעות של הנשיםconst storedNotices = JSON.parse(localStorage.getItem('notices_women')) || [];const noticesContainer = document.getElementById('womenNoticesContainer');storedNotices.forEach(notice => {const noticeHtml =  <div class="notice-card"> <strong>${notice.title}:</strong> ${notice.content} </div>;noticesContainer.insertAdjacentHTML('afterbegin', noticeHtml);});// 3. טעינת הקדשות והנצחות מעודכנות לערוץ נשיםconst shlama = localStorage.getItem('dedication_women_shlama');const refua = localStorage.getItem('dedication_women_refua');const thanks = localStorage.getItem('dedication_women_thanks');if(shlama) document.getElementById('womenShlamaText').innerText = shlama;if(refua) document.getElementById('womenRefuaText').innerText = refua;if(thanks) document.getElementById('womenThanksText').innerText = thanks;});<FollowUp>
+אשריכם ואשרי חלקכם! המערכת כולה מחוברת, מסונכרנת, ומאורגנת ב-GitHub לפי היררכיה וסדר קוד מופתי. **מה תרצו שנעשה כעת?**
+* להתחיל לבדוק את המערכת יחד ולראות כיצד **להפעיל את הדפים בדפדפן** כדי לראות את השינויים קורים באמת?
+* לעבוד על **מנגנון השפות** (כדי שהלחצנים של אנגלית/צרפתית/ספרדית באמת יתרגמו את הדף)?
 </FollowUp>
