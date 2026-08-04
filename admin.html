@@ -285,3 +285,4 @@
                     <div>
                         <label>סוג הזמן/סדר:</label>
 השעה המדויקת:סנכרן ועדכן זמנים© פנל מוגן ומאובטח – הנהלת פורטל המוסדות המרכזי | חיבור מוסמך בלבד
+function saveToStorage(key, newData) {let currentData = JSON.parse(localStorage.getItem(key)) || [];currentData.unshift(newData);localStorage.setItem(key, JSON.stringify(currentData));}
