@@ -1,1 +1,252 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פורטל הישיבה המרכזי - דף הבית</title>
+    <style>
+        :root {
+            --primary: #0f2027;
+            --secondary: #203a43;
+            --accent: #d4af37;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --bg-light: #f4f7f6;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .bsd-bar {
+            background-color: #ffffff;
+            text-align: center;
+            padding: 5px 0;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            letter-spacing: 2px;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--text-light);
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .channels-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .channel-link {
+            background: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        .channel-link.active-page {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-right: 5px solid var(--primary);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eeeeee;
+            padding-bottom: 8px;
+        }
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .role-box {
+            background: #f9fbfd;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .role-title {
+            font-weight: bold;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        .role-name {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .dedications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .dedication-box {
+            padding: 15px;
+            border-radius: 6px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .dedication-shlama { background: #5c6bc0; }
+        .dedication-refua { background: #26a69a; }
+        .dedication-thanks { background: #78909c; }
+
+        .zmanim-list {
+            list-style: none;
+        }
+
+        .zmanim-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .zman-time {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary);
+            color: var(--text-light);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bsd-bar">בס"ד</div>
+
+    <header>
+        <h1>פורטל הישיבה המרכזי</h1>
+        <p>מערכת ניהול, לימוד ותוכן רוחני מרוכזת</p>
+    </header>
+
+    <div class="container" style="margin-top: 20px;">
+        <nav class="channels-nav">
+            <a href="index.html" class="channel-link active-page">🏠 דף בית גברים / כללי</a>
+            <a href="women.html" class="channel-link">🌸 ערוץ נשים (women.html)</a>
+            <a href="plan.html" class="channel-link">📅 תוכנית הלימודים (plan.html)</a>
+            <a href="admin.html" class="channel-link">⚙️ פנל ניהול מוסמך (admin.html)</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        
+        <section class="card">
+
+
+            <div class="card-title">👥 בעלי תפקידים והנהלת המוסדות</div>
+            <div class="roles-grid">
+                <div class="role-box">
+                    <div class="role-title">מנכ"ל המוסדות</div>
+                    <div class="role-name">הרב המנהל הראשי שליט"א</div>
+                </div>
+                <div class="role-box">
+                    <div class="role-title">רבנית הישיבה</div>
+                    <div class="role-name">הרבנית תחי' (מחלקת נשים)</div>
+                </div>
+                <div class="role-box">
+                    <div class="role-title">מנהל מוסמך (גברים)</div>
+                    <div class="role-name">אחראי תפעול וסדר רוחני</div>
+                </div>
+                <div class="role-box">
+                    <div class="role-title">מנהל מוסמך (נשים)</div>
+                    <div class="role-name">אחראית תפעול לימודי נשים</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-title">📢 הודעות מערכת ועדכוני קוד</div>
+            <p>ברוכים הבאים לפורטל הישיבה המפואר! המערכת מעודכנת ומאובטחת.</p>
+        </section>
+
+        <section class="card">
+            <div class="card-title">💎 הקדשות, הנצחות וברכות</div>
+            <div class="dedications-grid">
+                <div class="dedication-box dedication-shlama">
+                    <h4>לעילוי נשמת</h4>
+                    <p>הקדושים והנפטרים מעמנו. תנצב"ה.</p>
+                </div>
+                <div class="dedication-box dedication-refua">
+                    <h4>לרפואה והצלחה</h4>
+                    <p>לכל חולי עמו ישראל, לרפואת הנפש והגוף.</p>
+                </div>
+                <div class="dedication-box dedication-thanks">
+                    <h4>הוקרת תודה</h4>
+                    <p>נדיבי עם ותומכי התורה יחיו.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-title">🕒 זמני היום בהלכה</div>
+            <ul class="zmanim-list">
+                <li><span>עלות השחר:</span> <span class="zman-time">04:42</span></li>
+                <li><span>נץ החמה:</span> <span class="zman-time">06:12</span></li>
+                <li><span>חצות היום:</span> <span class="zman-time">12:45</span></li>
+                <li><span>שקיעת החמה:</span> <span class="zman-time">19:20</span></li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>© כל הזכויות שמורות לפורטל הישיבה המרכזי</p>
+    </footer>
+
+</body>
+</html>
