@@ -225,6 +225,7 @@
             border-radius: 6px;
             color: #fff;
             text-align: center;
+            min-height: 120px;
         }
 
         .dedication-shlama { background: #5c6bc0; } /* לעילוי נשמת */
@@ -328,17 +329,6 @@
                         <div class="role-title">מנהל משנה (גברים)</div>
                         <div class="role-name">רכז לוגיסטיקה ומערכת</div>
                     </div>
-                    <div class="role-box">
-                        <div class="role-title">מנהל משנה (נשים)</div>רכזת אירועים ורישום© כל הזכויות שמורות לפורטל הישיבה המרכזי | מערכת מנוהלת ומאובטחת### מה כולל קובץ זה? (מבנה מלמעלה למטה):
-1. **בס"ד מובנה וברור** בראש הדף.
-2. **שורת שפות** מעוצבת מתחת לכותרת הראשית.
-3. **ערוצי ניווט רשמיים** המקשרים לקבצים הבאים שנבנה (`women.html`, `plan.html`, `admin.html`).
-4. **אזור בעלי תפקידים מוסמכים** עם הפרדה ברורה (מנכ"ל, רבנית, מנהל מוסמך גברים/נשים, מנהל משנה גברים/נשים).
-5. **לוח הודעות מערכת** מסודר לפי תגיות.
-6. **לוח מודעות פנימי** בצבע ייחודי להבלטה.
-7. **בלוק הקדשות מפואר** מחולק ל-3 (לעילוי נשמת / לרפואה והצלחה / הוקרת תודה).
-8. **זמני היום בהלכה** מעוצבים בסרגל הצדי.
-
-<FollowUp>
-האם קובץ ה-**index.html** מונח ומאורגן בדיוק לפי רצונכם, וכעת נוכל לעבור לפתח יחד באותה רמת פירוט את הקובץ השני ברשימה: **plan.html (תוכנית הלימודים)**?
+                    <div class="role-box">מנהל משנה (נשים)רכזת אירועים ורישום© כל הזכויות שמורות לפורטל הישיבה המרכזי | מערכת מנוהלת ומאובטחתdocument.addEventListener("DOMContentLoaded", function() {// 1. טעינת הודעות דינמיות שנשלחו לערוץ indexconst storedMessages = JSON.parse(localStorage.getItem('messages_index')) || [];const msgContainer = document.getElementById('messagesContainer');storedMessages.forEach(msg => {const msgHtml =  <div class="message-item"> <span>${msg.content}</span> <span class="message-tag">${msg.tag}</span> </div>;msgContainer.insertAdjacentHTML('afterbegin', msgHtml);});// 2. טעינת מודעות דינמיות ללוחconst storedNotices = JSON.parse(localStorage.getItem('notices_index')) || [];const noticesContainer = document.getElementById('noticesContainer');storedNotices.forEach(notice => {const noticeHtml =  <div class="notice-card"> <strong>${notice.title}:</strong> ${notice.content} </div>;noticesContainer.insertAdjacentHTML('afterbegin', noticeHtml);});// 3. טעינת הקדשות והנצחות מעודכנותconst shlama = localStorage.getItem('dedication_index_shlama');const refua = localStorage.getItem('dedication_index_refua');const thanks = localStorage.getItem('dedication_index_thanks');if(shlama) document.getElementById('shlamaText').innerText = shlama;if(refua) document.getElementById('refuaText').innerText = refua;if(thanks) document.getElementById('thanksText').innerText = thanks;// 4. טעינת זמני הלכה דינמייםconst storedZmanim = JSON.parse(localStorage.getItem('zmanim_list')) || {};for (const [zmanName, zmanTime] of Object.entries(storedZmanim)) {// בדיקה אם קיים אלמנט קיים לזמן הזה, אם כן נעדכן, אם לא נורשם חדשconst existingLi = document.getElementById(zman-${zmanName});if(existingLi) {existingLi.querySelector('.zman-time').innerText = zmanTime;} else {const zmanContainer = document.getElementById('zmanimContainer');const newLi = <li id="zman-${zmanName}"><span>${zmanName}:</span> <span class="zman-time">${zmanTime}</span></li>;zmanContainer.insertAdjacentHTML('beforeend', newLi);}}});<FollowUp>
+דף הבית הראשי מחובר ומסונכרן כעת! האם נמשיך מיד לעדכן באותו האופן את הדף הבא בתור: **`plan.html` (תוכנית הלימודים המפוארת)** כדי שגם היא תקבל עדכוני הודעות וזמנים בזמן אמת מהמנהל?
 </FollowUp>
