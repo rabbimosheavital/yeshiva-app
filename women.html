@@ -272,3 +272,4 @@
                 { text: "Chana bat Sarah for happiness and divine blessing", type: "health" }
             ];
             document.getElementById('womenDedicationsMemory').innerHTML = dedications.filter(d => d.type === 'memory').map(d => <p style="margin-bottom:6px; font-size:0.9rem;">&bull; ${d.text}</p>).join('') || 'No entries';document.getElementById('womenDedicationsHealth').innerHTML = dedications.filter(d => d.type === 'health').map(d => <p style="margin-bottom:6px; font-size:0.9rem;">&bull; ${d.text}</p>).join('') || 'No entries';document.getElementById('womenDedicationsGratitude').innerHTML = dedications.filter(d => d.type === 'gratitude').map(d => <p style="margin-bottom:6px; font-size:0.9rem;">&bull; ${d.text}</p>).join('') || 'No entries';}
+window.onload = loadWomenPage;
