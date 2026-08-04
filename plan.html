@@ -1,1 +1,243 @@
+---
 
+### 2. `plan.html` (Study Curriculum & Daily Sedarim Schedule)
+```html
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeshiva Portal - Study Plan & Curriculum</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #16a085;
+            --bg-color: #ecf0f1;
+            --card-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #7f8c8d;
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+        .top-bh-bar {
+            background-color: #2c3e50;
+            color: #ffffff;
+            text-align: right;
+            padding: 4px 20px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        header {
+            background-color: var(--card-bg);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+        }
+        header h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        .nav-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .nav-link {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            transition: var(--transition);
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 20px 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            .nav-bar { grid-template-columns: repeat(2, 1fr); }
+        }
+        .main-content, .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .section-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid #bdc3c7;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        .seder-block {
+            border-left: 4px solid var(--accent-color);
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 12px;
+        }
+        .seder-time {
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 0.95rem;
+        }
+        .seder-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 3px 0;
+        }
+        .seder-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .feed-item {
+            padding: 12px;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .feed-item:last-child { border-bottom: none; }
+        .tag {
+            display: inline-block;
+            background: #e8f8f5;
+            color: var(--accent-color);
+            padding: 2px 8px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        footer {
+            background-color: var(--primary-color);
+            color: #bdc3c7;
+            text-align: center;
+            padding: 20px;
+            margin-top: 4px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bh-bar">B"H</div>
+
+    <header>
+        <h1>Study Curriculum</h1>
+        <p>Daily Sedarim Schedule & Study Track Synchronization</p>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-link">Home Portal</a>
+        <a href="plan.html" class="nav-link active">Study Plan</a>
+        <a href="women.html" class="nav-link">Women's Channel</a>
+        <a href="admin.html" class="nav-link">Admin Panel</a>
+    </nav>
+
+    <div class="container">
+        <div class="main-content">
+            <section class="section-card">
+                <h2 class="section-title">Daily Sedarim Schedule</h2>
+                <div class="seder-block">
+                    <div class="seder-time">06:30 AM - 07:15 AM</div>
+                    <div class="seder-name">Early Morning Hasidism & Musar Seder</div>
+                    <div class="seder-desc">Preparation study blocks before morning services.</div>
+                </div>
+                <div class="seder-block">
+                    <div class="seder-time">09:00 AM - 12:30 PM</div>
+                    <div class="seder-name">First Seder - Talmud Iyun (Analytical Study)</div>
+                    <div class="seder-desc">Deep text analysis, commentary study, and partner chavruta work.</div>
+                </div>
+                <div class="seder-block">
+                    <div class="seder-time">03:00 PM - 06:00 PM</div>
+                    <div class="seder-name">Second Seder - Talmud Bekiyut (Textual Mastery)</div>
+                    <div class="seder-desc">Rapid structural reading tracking monthly page quotas.</div>
+                </div>
+                <div class="seder-block">
+                    <div class="seder-time">08:00 PM - 09:30 PM</div>
+                    <div class="seder-name">Night Seder - Halacha & Practical Law</div>
+                    <div class="seder-desc">Reviewing Shulchan Aruch rulings and modern responsa texts.</div>
+                </div>
+            </section>
+
+            <section class="section-card">
+                <h2 class="section-title">Study Curriculum Alerts</h2>
+                <div id="planAlerts"></div>
+            </section>
+        </div>
+
+        <div class="sidebar">
+            <section class="section-card">
+                <h2 class="section-title">Dynamic Halachic Sync</h2>
+                <div id="planZmanim"></div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <p>Official Institutional Portal &copy; All Rights Reserved</p>
+    </footer>
+
+    <script>
+        function loadPlanData() {
+            const zmanim = JSON.parse(localStorage.getItem('zmanim_list')) || [];
+            const zmanimBox = document.getElementById('planZmanim');
+            zmanimBox.innerHTML = zmanim.map(z => `
+                <div style="display:flex; justify-content:between; padding:8px 0; border-bottom:1px solid #edf2f7; font-size:0.9rem;">
+                    <strong style="flex-grow:1;">${z.title}</strong>
+                    <span>${z.time}</span>
+                </div>
+            `).join('');
+
+            const alerts = JSON.parse(localStorage.getItem('messages_plan')) || [
+                { text: "Exams on tractate Baba Kamma chapters 1-3 scheduled for next Sunday.", tag: "Exams" },
+                { text: "New self-study materials for Halacha are available at the front desk.", tag: "Materials" }
+            ];
+            
+            document.getElementById('planAlerts').innerHTML = alerts.map(a => `
+                <div class="feed-item">
+                    <span class="tag">${a.tag || 'Curriculum'}</span>
+                    <p>${a.text}</p>
+                </div>
+            `).join('');
+        }
+
+        window.onload = loadPlanData;
+    </script>
+</body>
+</html>
