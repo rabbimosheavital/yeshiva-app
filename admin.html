@@ -240,12 +240,12 @@
         <div class="role-auth-bar">
             <div>
                 <strong>👤 זהות המנהל המחובר כעת:</strong>
-                <select class="role-select">
-                    <option>מנכ"ל המוסדות (הרשאות מלאות)</option>
-                    <option>רבנית הישיבה (ניהול ערוץ נשים)</option>
-                    <option>מנהל מוסמך גברים</option>
-                    <option>מנהל מוסמך נשים</option>
-                    <option>מנהל משנה גברים / נשים</option>
+                <select class="role-select" id="currentRole">
+                    <option value="ceo">מנכ"ל המוסדות (הרשאות מלאות)</option>
+                    <option value="rabbanit">רבנית הישיבה (ניהול ערוץ נשים)</option>
+                    <option value="admin_men">מנהל מוסמך גברים</option>
+                    <option value="admin_women">מנהל מוסמך נשים</option>
+                    <option value="deputy">מנהל משנה גברים / נשים</option>
                 </select>
             </div>
             <span style="color: var(--success); font-weight: bold;">● מחובר למערכת מאובטחת</span>
@@ -254,18 +254,22 @@
         <!-- 5. טופס עדכון הודעות מערכת וערוצים -->
         <section class="card">
             <div class="card-title">📢 הזנת הודעת מערכת חדשה</div>
-            <form onsubmit="event.preventDefault(); alert('ההודעה עודכנה בהצלחה בכל הערוצים!');">
+            <form id="msgForm">
                 <div class="form-group">
                     <label>בחר ערוץ יעד לאזורי ההודעות:</label>
-                    <select>
-                        <option>כללי / גברים (index.html)</option>
-                        <option>ערוץ נשים ומדרשה (women.html)</option>
-                        <option>תוכנית הלימודים (plan.html)</option>
+                    <select id="msgTarget">
+                        <option value="index">כללי / גברים (index.html)</option>
+                        <option value="women">ערוץ נשים ומדרשה (women.html)</option>
+                        <option value="plan">תוכנית הלימודים (plan.html)</option>
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>תגית הודעה:</label>
+                    <input type="text" id="msgTag" placeholder="לדוגמה: חדש, שיעורי תורה, מבחנים">
+                </div>
+                <div class="form-group">
                     <label>תוכן ההודעה:</label>
-                    <textarea placeholder="כתוב כאן את הודעת המערכת הרשמית..."></textarea>
+                    <textarea id="msgContent" placeholder="כתוב כאן את הודעת המערכת הרשמית..."></textarea>
                 </div>
                 <button type="submit" class="btn-submit">פרסם הודעה מוסמכת</button>
             </form>
@@ -274,14 +278,21 @@
         <!-- 6. טופס עדכון מודעות פנים ולוח מודעות -->
         <section class="card">
             <div class="card-title">📌 פרסום מודעה חדשה בלוח המודעות</div>
-            <form onsubmit="event.preventDefault(); alert('המודעה פורסמה בהצלחה!');">
+            <form id="noticeForm">
+                <div class="form-group">
+                    <label>בחר לוח יעד למודעה:</label>
+                    <select id="noticeTarget">
+                        <option value="index">כללי / גברים (index.html)</option>
+                        <option value="women">ערוץ נשים ומדרשה (women.html)</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label>כותרת המודעה / נושא החיבור:</label>
-                    <input type="text" placeholder="לדוגמה: חלוקת מלגות, חברותות, אבדות ומציאות...">
+                    <input type="text" id="noticeTitle" placeholder="לדוגמה: חברותות, אבדות ומציאות...">
                 </div>
                 <div class="form-group">
                     <label>פירוט המודעה:</label>
-                    <textarea placeholder="פרטי המודעה המלאים עבור התלמידים/תלמידות..."></textarea>
+                    <textarea id="noticeContent" placeholder="פרטי המודעה המלאים עבור התלמידים/תלמידות..."></textarea>
                 </div>
                 <button type="submit" class="btn-submit">תלה מודעה בלוח</button>
             </form>
@@ -290,15 +301,8 @@
         <!-- 7. טופס עדכון לוחות הנצחה, ברכות והוקרה -->
         <section class="card">
             <div class="card-title">💎 הזנת הקדשות ותרומות קודש</div>
-            <form onsubmit="event.preventDefault(); alert('לוח ההקדשות עודכן בהצלחה!');">
-                <div class="form-group">
-                    <label>סיווג ההקדשה במערכת:</label>
-                    <select>
-                        <option> לעילוי נשמת (נפטרים/קדושים)</option>
-                        <option> לרפואה והצלחה (חולים/עסקים)</option>
-                        <option> הוקרת תודה (תורמים ונדיבי עם)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>שם המוקדש ונוסח הברכה/אזכרה:</label>
-                    <textarea placeholder="הכנס את השמות והנוסח המדויק שיוצג בדף הבית..."></textarea>עדכן לוח הקדשות© פנל מוגן ומאובטח – הנהלת פורטל המוסדות המרכזי | חיבור מוסמך בלבד
+            <form id="dedicationForm">בחר ערוץ יעד להקדשה:כללי / גברים (index.html)ערוץ נשים ומדרשה (women.html)סיווג ההקדשה במערכת:לעילוי נשמת (נפטרים/קדושים)לרפואה והצלחה (חולים/עסקים)הוקרת תודה (תורמים ונדיבי עם)שם המוקדש ונוסח הברכה/אזכרה:עדכן לוח הקדשות© פנל מוגן ומאובטח – הנהלת פורטל המוסדות המרכזי | חיבור מוסמך בלבד// פונקציית עזר לשמירה קלה במערכתfunction saveToStorage(key, newData) {let currentData = JSON.parse(localStorage.getItem(key)) || [];currentData.unshift(newData); // הוספת החדש להתחלהlocalStorage.setItem(key, JSON.stringify(currentData));}// 1. טיפול בטופס הודעות מערכתdocument.getElementById('msgForm').addEventListener('submit', function(e) {e.preventDefault();const target = document.getElementById('msgTarget').value;const tag = document.getElementById('msgTag').value || 'עדכון';const content = document.getElementById('msgContent').value;if(!content) return alert('נא למלא תוכן הודעה');saveToStorage(messages_${target}, { tag, content });alert('ההודעה נשמרה בהצלחה עבור ערוץ ' + target);this.reset();});// 2. טיפול בטופס מודעות לוחdocument.getElementById('noticeForm').addEventListener('submit', function(e) {e.preventDefault();const target = document.getElementById('noticeTarget').value;const title = document.getElementById('noticeTitle').value;const content = document.getElementById('noticeContent').value;if(!title || !content) return alert('נא למלא את כל השדות');saveToStorage(notices_${target}, { title, content });alert('המודעה פורסמה בהצלחה בלוח!');this.reset();});// 3. טיפול בטופס הקדשות והנצחותdocument.getElementById('dedicationForm').addEventListener('submit', function(e) {e.preventDefault();const target = document.getElementById('dedicationTarget').value;const type = document.getElementById('dedicationType').value;const content = document.getElementById('dedicationContent').value;if(!content) return alert('נא למלא את נוסח ההקדשה');// שמירה לפי סוג וערוץ יעדlocalStorage.setItem(dedication_${target}_${type}, content);alert('לוח ההקדשות עודכן בהצלחה!');this.reset();});// 4. טיפול בטופס זמני היום בהלכהdocument.getElementById('zmanimForm').addEventListener('submit', function(e) {e.preventDefault();const name = document.getElementById('zmanName').value;const time = document.getElementById('zmanTime').value;if(!name || !time) return alert('נא למלא שם זמן ושעה קבועה');let zmanim = JSON.parse(localStorage.getItem('zmanim_list')) || {};zmanim[name] = time; // עדכון או הוספה של הזמןlocalStorage.setItem('zmanim_list', JSON.stringify(zmanim));alert('הזמן ההלכתי עודכן וסונכרן בהצלחה!');this.reset();});---
+
+<FollowUp>
+קובץ הניהול הראשי והבטוח (`admin.html`) מעודכן כעת ב-GitHub שלכם עם מנוע הנתונים. האם נמשיך מיד אל **קובץ הבית הראשי (`index.html`)** כדי להטמיע בו את הקוד שיודע לקרוא את הנתונים הללו ולהציגם לתלמידים?
+</FollowUp>
