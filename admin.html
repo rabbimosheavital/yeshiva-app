@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>פורטל הישיבה - פנל ניהול מוסמך</title>
     <style>
-        /* עיצוב פנל ניהול - גווני אבטחה ורצינות (אפור כהה, כחול כהה וזהב) */
         :root {
             --primary: #1a252f;
             --secondary: #2c3e50;
@@ -29,7 +28,6 @@
             line-height: 1.6;
         }
 
-        /* 1. שורת בס"ד עליונה */
         .bsd-bar {
             background-color: #ffffff;
             text-align: center;
@@ -41,7 +39,6 @@
             letter-spacing: 2px;
         }
 
-        /* כותרת ראשית (Header) */
         header {
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: var(--text-light);
@@ -55,38 +52,12 @@
             margin-bottom: 10px;
         }
 
-        /* 2. שורת בחירת שפות לניהול */
-        .language-selector {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.15);
-            color: var(--text-light);
-            border: 1px solid var(--accent);
-            padding: 6px 14px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.85rem;
-        }
-
-        .lang-btn.active {
-            background-color: var(--accent);
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        /* מיכל מרכזי */
         .container {
             max-width: 1200px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
-        /* 3. ערוצי ניווט מהירים למנהל */
         .channels-nav {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -112,7 +83,6 @@
             border-color: var(--accent);
         }
 
-        /* עיצוב כרטיסיות ניהול טפסים */
         .card {
             background: #ffffff;
             border-radius: 10px;
@@ -130,7 +100,6 @@
             padding-bottom: 8px;
         }
 
-        /* 4. בורר הרשאות תפקידים בכניסה */
         .role-auth-bar {
             background: #e1f5fe;
             border: 1px solid #b3e5fc;
@@ -152,7 +121,6 @@
             color: var(--primary);
         }
 
-        /* עיצוב טפסים אחיד ומקצועי */
         .form-group {
             margin-bottom: 15px;
         }
@@ -194,7 +162,6 @@
             border: 1px solid var(--accent);
         }
 
-        /* פוטר */
         footer {
             text-align: center;
             padding: 20px;
@@ -207,16 +174,13 @@
 </head>
 <body>
 
-    <!-- 1. בס"ד עליון -->
     <div class="bsd-bar">בס"ד</div>
 
-    <!-- כותרת ראשית -->
     <header>
         <h1>פנל ניהול ופיקוח מוסמך</h1>
         <p>עדכון מערכות, הזנת תכנים וניהול לוחות המודעות והזמנים</p>
     </header>
 
-    <!-- 3. ערוצי הניווט (חזרה לדפים הציבוריים) -->
     <div class="container" style="margin-top: 20px; margin-bottom: 0;">
         <nav class="channels-nav">
             <a href="index.html" class="channel-link">🏠 דף בית גברים / כללי</a>
@@ -228,7 +192,6 @@
 
     <div class="container">
 
-        <!-- 4. אזור אימות/בחירת תפקיד מוסמך לביצוע פעולות -->
         <div class="role-auth-bar">
             <div>
                 <strong>👤 זהות המנהל המחובר כעת:</strong>
@@ -237,13 +200,13 @@
                     <option value="rabbanit">רבנית הישיבה (ניהול ערוץ נשים)</option>
                     <option value="admin_men">מנהל מוסמך גברים</option>
                     <option value="admin_women">מנהל מוסמך נשים</option>
-                    <option value="deputy">מנהל משנה גברים / נשים</option>
+                    <option value="deputy_men">מנהל משנה גברים</option>
+                    <option value="deputy_women">מנהלת משנה נשים</option>
                 </select>
             </div>
             <span style="color: var(--success); font-weight: bold;">● מחובר למערכת מאובטחת</span>
         </div>
 
-        <!-- 5. טופס עדכון הודעות מערכת וערוצים -->
         <section class="card">
             <div class="card-title">📢 הזנת הודעת מערכת חדשה</div>
             <form id="msgForm">
@@ -267,7 +230,6 @@
             </form>
         </section>
 
-        <!-- 6. טופס עדכון מודעות פנים ולוח מודעות -->
         <section class="card">
             <div class="card-title">📌 פרסום מודעה חדשה בלוח המודעות</div>
             <form id="noticeForm">
@@ -290,15 +252,37 @@
             </form>
         </section>
 
-        <!-- 7. טופס עדכון לוחות הנצחה, ברכות והוקרה -->
         <section class="card">
             <div class="card-title">💎 הזנת הקדשות ותרומות קודש</div>
             <form id="dedicationForm">
                 <div class="form-group">
                     <label>בחר ערוץ יעד להקדשה:</label>
                     <select id="dedicationTarget">
-                        <option value="index">כללי / גברים (index.html)</option>ערוץ נשים ומדרשה (women.html)סיווג ההקדשה במערכת:לעילוי נשמת (נפטרים/קדושים)לרפואה והצלחה (חולים/עסקים)הוקרת תודה (תורמים ונדיבי עם)שם המוקדש ונוסח הברכה/אזכרה:עדכן לוח הקדשות© פנל מוגן ומאובטח – הנהלת פורטל המוסדות המרכזי | חיבור מוסמך בלבדfunction saveToStorage(key, newData) {let currentData = JSON.parse(localStorage.getItem(key)) || [];currentData.unshift(newData);localStorage.setItem(key, JSON.stringify(currentData));}document.getElementById('msgForm').addEventListener('submit', function(e) {e.preventDefault();const target = document.getElementById('msgTarget').value;const tag = document.getElementById('msgTag').value || 'עדכון';const content = document.getElementById('msgContent').value;if(!content) return alert('נא למלא תוכן הודעה');saveToStorage(messages_${target}, { tag, content });alert('ההודעה נשמרה בהצלחה עבור ערוץ ' + target);this.reset();});document.getElementById('noticeForm').addEventListener('submit', function(e) {e.preventDefault();const target = document.getElementById('noticeTarget').value;const title = document.getElementById('noticeTitle').value;const content = document.getElementById('noticeContent').value;if(!title || !content) return alert('נא למלא את כל השדות');saveToStorage(notices_${target}, { title, content });alert('המודעה פורסמה בהצלחה בלוח!');this.reset();});document.getElementById('dedicationForm').addEventListener('submit', function(e) {e.preventDefault();const target = document.getElementById('dedicationTarget').value;const type = document.getElementById('dedicationType').value;const content = document.getElementById('dedicationContent').value;if(!content) return alert('נא למלא את נוסח ההקדשה');localStorage.setItem(dedication_${target}_${type}, content);alert('לוח ההקדשות עודכן בהצלחה!');this.reset();});document.getElementById('zmanimForm').addEventListener('submit', function(e) {e.preventDefault();const name = document.getElementById('zmanName').value;const time = document.getElementById('zmanTime').value;if(!name || !time) return alert('נא למלא שם זמן ושעה קבועה');let zmanim = JSON.parse(localStorage.getItem('zmanim_list')) || {};zmanim[name] = time;localStorage.setItem('zmanim_list', JSON.stringify(zmanim));alert('הזמן ההלכתי עודכן וסונכרן בהצלחה!');this.reset();});<FollowUp>
-                            
+                        <option value="index">כללי / גברים (index.html)</option>
+                        <option value="women">ערוץ נשים ומדרשה (women.html)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>סיווג ההקדשה במערכת:</label>
+                    <select id="dedicationType">
+                        <option value="shlama">לעילוי נשמת (נפטרים/קדושים)</option>
+                        <option value="refua">לרפואה והצלחה (חולים/עסקים)</option>
+                        <option value="thanks">הוקרת תודה (תורמים ונדיבי עם)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>שם המוקדש ונוסח הברכה/אזכרה:</label>
+                    <textarea id="dedicationContent" placeholder="הכנס את השמות והנוסח המדויק שיוצג..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">עדכן לוח הקדשות</button>
+            </form>
+        </section>
 
-האם הפנל התיישר בצורה חלקה ונקייה, ונוכל לעבור בבטחה לשלב הבא: **עדכון מנגנון השפות בקובץ `plan.html`**?
+        <section class="card">
+            <div class="card-title">🕒 עדכון שעון זמני היום וסדרי הישיבה</div>
+            <form id="zmanimForm">
+                <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div>
+                        <label>סוג הזמן/סדר:</label>השעה המדויקת:סנכרן ועדכן זמנים© פנל מוגן ומאובטח – הנהלת פורטל המוסדות המרכזי | חיבור מוסמך בלבדfunction saveToStorage(key, newData) {let currentData = JSON.parse(localStorage.getItem(key)) || [];currentData.unshift(newData);localStorage.setItem(key, JSON.stringify(currentData));}document.getElementById('msgForm').addEventListener('submit', function(e) {e.preventDefault();const target = document.getElementById('msgTarget').value;const tag = document.getElementById('msgTag').value || 'עדכון';const content = document.getElementById('msgContent').value;if(!content) return alert('נא למלא תוכן הודעה');saveToStorage(messages_${target}, { tag, content });alert('ההודעה נשמרה בהצלחה עבור ערוץ ' + target);this.reset();});document.getElementById('noticeForm').addEventListener('submit', function(e) {e.preventDefault();const target = document.getElementById('noticeTarget').value;const title = document.getElementById('noticeTitle').value;const content = document.getElementById('noticeContent').value;if(!title || !content) return alert('נא למלא את כל השדות');saveToStorage(notices_${target}, { title, content });alert('המודעה פורסמה בהצלחה בלוח!');this.reset();});document.getElementById('dedicationForm').addEventListener('submit', function(e) {e.preventDefault();const target = document.getElementById('dedicationTarget').value;const type = document.getElementById('dedicationType').value;const content = document.getElementById('dedicationContent').value;if(!content) return alert('נא למלא את נוסח ההקדשה');localStorage.setItem(dedication_${target}_${type}, content);alert('לוח ההקדשות עודכן בהצלחה!');this.reset();});document.getElementById('zmanimForm').addEventListener('submit', function(e) {e.preventDefault();const name = document.getElementById('zmanName').value;const time = document.getElementById('zmanTime').value;if(!name || !time) return alert('נא למלא שם זמן ושעה קבועה');let zmanim = JSON.parse(localStorage.getItem('zmanim_list')) || {};zmanim[name] = time;localStorage.setItem('zmanim_list', JSON.stringify(zmanim));alert('הזמן ההלכתי עודכן וסונכרן בהצלחה!');this.reset();});<FollowUp>
+סמנו ומחקו את כל הקוד הישן בתוך קובץ **`admin.html`** ב-GitHub, הדביקו את הקוד החדש והסגור הזה, ולחצו על Commit changes כדי לחתום את פיתוח המערכת. ספרו לי כשזה מבוצע!
 </FollowUp>
